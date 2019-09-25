@@ -67,9 +67,10 @@
                 android:ems="10"
                 android:gravity="center"
                 android:hint="CONTRASEÑA"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:selectAllOnFocus="false" />
-            android:inputType="textPassword" />
+
+
         </LinearLayout>
 
         <Button
