@@ -13,7 +13,7 @@
     android:layout_marginBottom="10dp"
     android:background="#3F7CB4"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".menuPrincipal">
 
     <TextView
         android:id="@+id/lblMenu"
@@ -95,7 +95,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="Suscripcion"
+            android:text="Suscripción"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textStyle="bold" />
     </LinearLayout>
