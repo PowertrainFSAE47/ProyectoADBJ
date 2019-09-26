@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
                     // Tiene user y tiene clave
                     Toast.makeText(MainActivity.this,"WENA PERRO",Toast.LENGTH_SHORT).show();
 
+                    //Borrar textos del login
+                    txUser.setText("");
+                    txPassword.setText("");
+
                     Intent aMenuPrincipal = new Intent(MainActivity.this, menuPrincipal.class);
                     startActivity(aMenuPrincipal);
 
