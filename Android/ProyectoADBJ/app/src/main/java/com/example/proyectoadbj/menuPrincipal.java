@@ -48,6 +48,16 @@ public class menuPrincipal extends AppCompatActivity {
             }
         });
 
+        btSubs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent aMenuSubs = new Intent(menuPrincipal.this, menuSubs.class);
+                startActivity(aMenuSubs);
+            }
+        });
+
+
+
 
 
 

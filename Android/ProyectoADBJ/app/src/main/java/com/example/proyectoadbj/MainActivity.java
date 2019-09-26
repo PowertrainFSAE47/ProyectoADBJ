@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btLogin;
     private EditText txUser;
     private EditText txPassword;
+    private Button btSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         // Instanciar botones y controles
 
         btLogin=(Button) findViewById(R.id.btLogin);
+        btSignup=(Button) findViewById(R.id.btSignup);
         txUser=(EditText) findViewById(R.id.txUser);
         txPassword=(EditText) findViewById(R.id.txPassword);
 
@@ -50,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(aMenuPrincipal);
 
                 }
+            }
+        });
+
+        btSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent aMenuSubs = new Intent(MainActivity.this, menuSubs.class);
+                startActivity(aMenuSubs);
             }
         });
 

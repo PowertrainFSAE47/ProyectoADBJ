@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".menuSubs">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Suscripcion"
+            android:text="Nuevo Subscriptor"
             android:textAlignment="center"
             android:textSize="30sp" />
 
@@ -43,7 +43,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/txNombre"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -66,7 +66,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/txApellido"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -89,7 +89,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/txMail"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -112,7 +112,7 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/spinner2"
+                android:id="@+id/spPlan"
                 android:layout_width="213dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -134,7 +134,7 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/spinner3"
+                android:id="@+id/spPago"
                 android:layout_width="213dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -156,7 +156,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/textView20"
+                android:id="@+id/btRegistrar"
                 android:layout_width="213dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
@@ -169,11 +169,18 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btSuscripcion"
+                android:id="@+id/btAceptarSub"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:text="Aceptar" />
+
+            <Button
+                android:id="@+id/btCancelarSub"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Cancelar" />
         </LinearLayout>
 
     </LinearLayout>
