@@ -4,13 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:layout_marginStart="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginBottom="10dp"
     android:background="#3F7CB4"
     android:orientation="vertical"
     tools:context=".menuPrincipal">
@@ -20,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:text="Bienvenido, Harina"
         android:textAlignment="center"
         android:textSize="30sp" />
@@ -36,6 +29,7 @@
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:padding="15dp"
             android:text="Informacion"
@@ -48,10 +42,11 @@
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:text="Planes"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold"
-            android:text="Planes" />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -66,10 +61,11 @@
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:textStyle="bold"
-            android:text="Galeria" />
+            android:text="Galeria"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/bt"
@@ -77,10 +73,11 @@
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:textStyle="bold"
-            android:text="Button" />
+            android:text="Button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout

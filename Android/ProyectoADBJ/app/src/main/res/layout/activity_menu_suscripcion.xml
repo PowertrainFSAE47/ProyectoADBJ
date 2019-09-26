@@ -10,10 +10,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="#3F7CB4"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -170,11 +166,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btSuscripcion"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"

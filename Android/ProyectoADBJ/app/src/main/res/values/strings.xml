@@ -2,13 +2,14 @@
     <string name="app_name">ProyectoADBJ</string>
     <string-array name="Planes">
         <item>Plan Economico</item>
-        <item>Plan Comun</item>
-        <item>Plan Completo</item>
+        <item>Plan Normal</item>
+        <item>Plan Premium</item>
     </string-array>
 
     <string-array name="tipoPago">
         <item>Red Compra</item>
         <item>Credito</item>
+        <item>Transferencia</item>
         <item>Efectivo</item>
     </string-array>
 </resources>
