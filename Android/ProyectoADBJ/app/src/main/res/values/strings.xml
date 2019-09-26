@@ -5,4 +5,10 @@
         <item>Plan Comun</item>
         <item>Plan Completo</item>
     </string-array>
+
+    <string-array name="tipoPago">
+        <item>Red Compra</item>
+        <item>Credito</item>
+        <item>Efectivo</item>
+    </string-array>
 </resources>
