@@ -4,17 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="#3F7CB4"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:layout_margin="25dp">
+    tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lblMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Menu"
+        android:text="Bienvenido, Harina"
         android:textAlignment="center"
         android:textSize="30sp" />
 
@@ -24,21 +31,26 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btInfo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="Informacion" />
+            android:padding="15dp"
+            android:text="Informacion"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/btPlanes"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
             android:text="Planes" />
 
     </LinearLayout>
@@ -49,21 +61,25 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/btGaleria"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="Galeria" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/bt"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:text="Button" />
     </LinearLayout>
 
@@ -73,12 +89,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button9"
-            android:layout_width="100dp"
+            android:id="@+id/btSubs"
+            android:layout_width="327dp"
             android:layout_height="100dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="Suscripcion" />
+            android:text="Suscripcion"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

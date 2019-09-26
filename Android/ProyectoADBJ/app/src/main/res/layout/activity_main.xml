@@ -44,7 +44,7 @@
 
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/txUser"
                 style="@style/Widget.AppCompat.EditText"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
@@ -58,7 +58,7 @@
                 android:selectAllOnFocus="false" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/txPassword"
                 style="@style/Widget.AppCompat.EditText"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
@@ -74,7 +74,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btLogin"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
