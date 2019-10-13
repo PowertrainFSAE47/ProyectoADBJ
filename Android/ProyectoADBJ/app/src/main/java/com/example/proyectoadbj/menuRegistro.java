@@ -24,7 +24,7 @@ public class menuSubs extends AppCompatActivity {
         setContentView(R.layout.menu_subs);
 
         txNombre=findViewById(R.id.txNombre);
-        txApellido=findViewById(R.id.txApellido);
+        txApellido=findViewById(R.id.txApellidos);
         txMail=findViewById(R.id.txMail);
         btAceptarSub=findViewById(R.id.btAceptarSub);
         btCancelarSub=findViewById(R.id.btCancelarSub);
