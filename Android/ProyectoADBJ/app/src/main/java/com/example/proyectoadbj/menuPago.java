@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class pago extends AppCompatActivity {
+public class Pago extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
