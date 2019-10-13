@@ -1,15 +1,12 @@
+package com.example.proyectoadbj;
+
 public enum enumErrores {
 
-        passwordNoCoincide,
-        loginError,
-        dataError,
-        registroExiste,
-        registroNoExiste,
-        errorSQL,
-        formularioIncompleto,
-        registroExitoso,
-        registroFallido,
-        registroModificado,
-        registroEliminado;
-
+    passwordNoCoincide,
+    sinNombre,
+    sinApellido,
+    sinPassword,
+    loginError,
+    noImplementado,
+    sinEmail
 }

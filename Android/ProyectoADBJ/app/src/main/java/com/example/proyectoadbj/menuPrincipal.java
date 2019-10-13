@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class menuPrincipal extends AppCompatActivity {
 
@@ -51,7 +50,7 @@ public class menuPrincipal extends AppCompatActivity {
         btSubs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent aMenuSubs = new Intent(menuPrincipal.this, menuSubs.class);
+                Intent aMenuSubs = new Intent(menuPrincipal.this, menuRegistro.class);
                 startActivity(aMenuSubs);
             }
         });

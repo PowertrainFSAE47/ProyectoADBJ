@@ -1,5 +1,10 @@
 Features del gymapp
 
+Paleta de colores desde aca: https://flatuicolors.com/palette/ca
+
+Fondos: #00d2d3
+
+
 1- Desde el login es necesario identificar varios tipos de usuario
 	
 	1.1: Clientes registrados

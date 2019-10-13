@@ -15,10 +15,7 @@ public class menuDatosUsuario extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_datos_usuario);
 
-        lvDatosSubs = (ListView) findViewById(R.id.lvDatosSub);
-        ArrayList <String> lista = new ArrayList<String>();
 
     }
 }
