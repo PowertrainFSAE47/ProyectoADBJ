@@ -3,7 +3,7 @@ package com.example.proyectoadbj;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Usuario {
+public class Usuario implements Parcelable {
 
     private String nombres,apellidos,password,genero,email;
 
@@ -59,4 +59,37 @@ public class Usuario {
         this.genero = genero;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.nombres);
+        dest.writeString(this.apellidos);
+        dest.writeString(this.password);
+        dest.writeString(this.genero);
+        dest.writeString(this.email);
+    }
+
+    protected Usuario(Parcel in) {
+        this.nombres = in.readString();
+        this.apellidos = in.readString();
+        this.password = in.readString();
+        this.genero = in.readString();
+        this.email = in.readString();
+    }
+
+    public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel source) {
+            return new Usuario(source);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 }

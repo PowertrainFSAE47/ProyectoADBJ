@@ -7,15 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class menuPago extends AppCompatActivity {
+
+
+
 
     private Button btPagar;
     private Button btNoPagar;
 
-    private RadioButton rbCredito;
-    private RadioButton rbDebito;
-    private RadioButton rbOnepay;
+    private RadioGroup rgPagos;
+
+    private TextView lbNombreRegistrado;
+    private TextView lbCorreoRegistrado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +29,21 @@ public class menuPago extends AppCompatActivity {
         setContentView(R.layout.activity_pago);
 
         // Botones de pago
-        btPagar = (Button) findViewById(R.id.btPagar);
-        btNoPagar = (Button) findViewById(R.id.btNoPagar);
+        btPagar = findViewById(R.id.btPagar);
+        btNoPagar = findViewById(R.id.btNoPagar);
 
-        // Radio botones
+        // Radio group
+        rgPagos = findViewById(R.id.rgPagos);
+        lbNombreRegistrado=findViewById(R.id.lbNombreRegistrado);
+        lbCorreoRegistrado=findViewById(R.id.lbCorreoRegistrado);
 
-        rbCredito = (RadioButton) findViewById(R.id.rbCredito);
-        rbDebito = (RadioButton) findViewById(R.id.rbDebito);
-        rbOnepay = (RadioButton) findViewById(R.id.rbOnepay);
+        //Obtener intent
+        Intent intentRegistro = getIntent();
+        Usuario myUser = intentRegistro.getParcelableExtra("myUser");
 
+        // Actualizar datos registrados.
+        lbNombreRegistrado.setText(myUser.getNombres()+" "+myUser.getApellidos());
+        lbCorreoRegistrado.setText(myUser.getEmail());
 
         btNoPagar.setOnClickListener(new View.OnClickListener() {
             @Override

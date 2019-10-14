@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".menuRegistro">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,12 +23,58 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:text="Tu pago"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="TUS DATOS"
             android:textAlignment="center"
             android:textColor="#222f3e"
-            android:textSize="30sp"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/button_round"
+            android:backgroundTint="#8395a7"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/lbNombreRegistrado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pedrito de Los palotes"
+                android:textAlignment="center"
+                android:textColor="#222f3e"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lbCorreoRegistrado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="pedrito@lospalotes.net"
+                android:textAlignment="center"
+                android:textColor="#222f3e"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lblMediosPago"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="MEDIOS DE PAGO"
+            android:textAlignment="center"
+            android:textColor="#222f3e"
+            android:textSize="25dp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -37,76 +84,74 @@
             android:orientation="horizontal">
 
 
-
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:id="@+id/rgPagos">
 
                 <RadioButton
-                    android:checked="true"
                     android:id="@+id/rbCredito"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="#222f3e"
+                    android:checked="true"
                     android:text="TARJETAS DE CREDITO"
-                    android:textSize="20dp"/>
+                    android:textColor="#222f3e"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/rbDebito"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="#222f3e"
                     android:text="TARJETAS DE DEBITO"
-                    android:textSize="20dp"/>
+                    android:textColor="#222f3e"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/rbOnepay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="#222f3e"
                     android:text="ONEPAY"
-                    android:textSize="20dp"/>
+                    android:textColor="#222f3e"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
             </RadioGroup>
         </LinearLayout>
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:layout_margin="20dp"
             android:orientation="horizontal"
-            android:layout_height="80dp"
             android:padding="5dp">
 
             <Button
                 android:id="@+id/btPagar"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_weight="1"
-                android:text="Ir a pago"
-                android:backgroundTint="#1dd1a1"
-                android:textStyle="bold"
-                android:textSize="20dp"
                 android:layout_margin="10dp"
-                android:background="@drawable/edit_round"/>
+                android:layout_weight="1"
+                android:background="@drawable/edit_round"
+                android:backgroundTint="#1dd1a1"
+                android:text="Ir a pago"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btNoPagar"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
+                android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/edit_round"
                 android:backgroundTint="#ee5253"
                 android:text="Volver"
                 android:textColor="#222f3e"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
-                android:textSize="20dp"/>
+                android:textSize="20dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

@@ -11,6 +11,7 @@ public class UIHelpers {
         // Obtener radioboton presionado
 
         int radioButtonID = rg.getCheckedRadioButtonId();
+        System.out.println("Radiobutton ID: "+radioButtonID);
         View radioButton = rg.findViewById(radioButtonID);
         int idx = rg.indexOfChild(radioButton);
         RadioButton r = (RadioButton) rg.getChildAt(idx);

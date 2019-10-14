@@ -39,6 +39,7 @@ public class menuRegistro extends AppCompatActivity {
         txRepetirPassword = findViewById(R.id.txRepetirPassword);
         btAceptarSub = findViewById(R.id.btAceptarSub);
         btCancelarSub = findViewById(R.id.btCancelarSub);
+        rgGenero=findViewById(R.id.rgGenero);
 
 
         // Almacenar claves
@@ -93,7 +94,9 @@ public class menuRegistro extends AppCompatActivity {
 
                     // Usuario debe ser enviado a la base de datos o algo.
 
+
                     Intent aMenuPago = new Intent(menuRegistro.this, menuPago.class);
+                    aMenuPago.putExtra("myUser",myUser);
                     startActivity(aMenuPago);
                 } else {
                     errorHandler.Toaster(stackErrores.lastElement(), menuRegistro.this);
