@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
                     txUser.setText("");
                     txPassword.setText("");
 
-                    Intent aMenuPrincipal = new Intent(MainActivity.this, menuPrincipal.class);
-                    startActivity(aMenuPrincipal);
+                    Intent aDashboard = new Intent(MainActivity.this, Dashboard.class);
+                    startActivity(aDashboard);
 
 
 
