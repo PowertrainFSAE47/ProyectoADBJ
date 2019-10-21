@@ -1,0 +1,36 @@
+Features del gymapp
+
+Paleta de colores desde aca: https://flatuicolors.com/palette/ca
+
+Fondos: #c8d6e5
+
+
+1- Desde el login es necesario identificar varios tipos de usuario
+	
+	1.1: Clientes registrados
+	1.2: Personal que trabaja en el gimnasio
+	1.4: Clientes no usuarios, por registrarse.
+	
+2- Un cliente registrado debe acceder a la siguiente funcionalidad:
+	2.1: Conocer los detalles de sus planes de suscripción. (pantalla detalle planes)
+	2.2: Paseo por cada una de las maquinas existentes. (pantalla con tabs horizontales)
+	2.3: Paseo por cada una de las actividades grupales. (pantalla con tabs horizontales)
+	2.4: Log de estadisticas:
+		2.4.1: Horarios de entrada y salida en sedes.
+		2.5.1: Maquinas usadas
+	2.5: Añadirse a clases grupales.
+	2.6: Agendar hora con entrenador.
+	2.7: Tutorial de rutinas de ejercicios.
+	
+3 - El personal que trabaja (trainers, etc) debe acceder a:
+	3.1: Tomar tutoría de actividades grupales.
+	3.2: Aceptar, rechazar o reagendar entrenamientos personales.
+	3.3: Crear calendario de disponibilidad visible por clientes registrados.
+	3.4: Log de actividades realizadas (query a la base de datos)
+	
+4- Clientes por registrar o no registrados:
+
+	4.1: Formularios de registro. (implementada UI, 13/10)
+	4.2: Pagos. (implementada UI, 13/10 - falta seleccionar plan y mostrar precios)
+	2.2: Paseo por cada una de las maquinas existentes.
+	2.7: Tutorial de rutinas de ejercicios.
