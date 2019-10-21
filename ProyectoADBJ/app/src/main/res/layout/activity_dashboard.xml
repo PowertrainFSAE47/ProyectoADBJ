@@ -10,37 +10,59 @@
     tools:context=".Dashboard">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/gymFondo"
-        android:paddingTop="12dp"
-        android:paddingLeft="30dp">
+        android:orientation="horizontal"
+        android:background="@color/gymFondo">
 
-        <TextView
-            android:id="@+id/lblUser"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/imgUser"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="PowerLifter69"
-            android:textSize="20dp"/>
+            android:padding="5dp"
+            app:srcCompat="@drawable/arnold" />
 
-        <TextView
-            android:id="@+id/lblLocation"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Chile"
-            android:textSize="16dp"/>
+            android:layout_weight="20"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/lblUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PowerLifter69"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/lblLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Chile"
+                android:textSize="16dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
+        android:id="@+id/tlDashboard"
         android:layout_height="wrap_content"
         android:background="@color/gymFondo"
         app:tabTextColor="@android:color/black"
         app:tabMode="scrollable">
 
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabUser"
+            android:textSize="10dp"
+            android:text="Yo" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -71,4 +93,13 @@
             android:text="Máquinas" />
 
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/vpDashboard">
+
+
+    </androidx.viewpager.widget.ViewPager>
+
 </LinearLayout>
