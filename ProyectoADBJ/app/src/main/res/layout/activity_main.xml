@@ -41,7 +41,7 @@
                 android:background="@drawable/edit_round"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="USUARIO"
+                android:hint="EMAIL"
                 android:inputType="textPersonName"
                 android:selectAllOnFocus="false" />
 

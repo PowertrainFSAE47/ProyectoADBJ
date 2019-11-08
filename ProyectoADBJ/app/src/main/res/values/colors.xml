@@ -3,5 +3,10 @@
     <color name="colorPrimary">#6DB864</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="topBar">#25364F</color>
     <color name="gymFondo">#25374F</color>
+    <color name="grey_font">#ff9e9e9e</color>
+    <color name="text_shadow">#000000</color>
+    <color name="text_shadow_white">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 </resources>

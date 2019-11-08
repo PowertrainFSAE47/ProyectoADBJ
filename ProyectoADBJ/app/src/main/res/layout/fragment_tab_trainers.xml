@@ -6,9 +6,26 @@
     tools:context=".tabTrainers">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/tabTrainers" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dashboard_background_blue"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/tabTrainers" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>
