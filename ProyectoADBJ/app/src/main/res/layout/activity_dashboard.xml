@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="PowerLifter69"
+                android:textColor="@android:color/white"
                 android:textSize="20dp" />
 
             <TextView
@@ -45,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Chile"
+                android:textColor="@android:color/white"
                 android:textSize="16dp" />
         </LinearLayout>
     </LinearLayout>
@@ -54,7 +56,7 @@
         android:id="@+id/tlDashboard"
         android:layout_height="wrap_content"
         android:background="@color/gymFondo"
-        app:tabTextColor="@android:color/black"
+        app:tabTextColor="@android:color/white"
         app:tabMode="scrollable">
 
         <com.google.android.material.tabs.TabItem
