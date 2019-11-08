@@ -140,6 +140,7 @@
 
     </LinearLayout>
 
+
     <ToggleButton
         android:id="@+id/tbtMapa"
         android:layout_width="300dp"
