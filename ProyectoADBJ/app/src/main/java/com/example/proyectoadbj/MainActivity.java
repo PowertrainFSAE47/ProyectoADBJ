@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,7 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btLogin;
     private EditText txUser;
     private EditText txPassword;
-    private Button btSignup;
+    private TextView txSignup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         // Instanciar botones y controles
 
         btLogin = (Button) findViewById(R.id.btLogin);
-        btSignup = (Button) findViewById(R.id.btSignup);
+        txSignup = (TextView) findViewById(R.id.txSignup);
         txUser = (EditText) findViewById(R.id.txUser);
         txPassword = (EditText) findViewById(R.id.txPassword);
 
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btSignup.setOnClickListener(new View.OnClickListener() {
+        txSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent aMenuSubs = new Intent(MainActivity.this, menuRegistro.class);
