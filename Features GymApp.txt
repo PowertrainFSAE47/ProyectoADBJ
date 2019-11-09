@@ -53,3 +53,7 @@ yoga
 zumba
 cardio step
 spinning
+
+
+
+Estructura general de la base de datos
