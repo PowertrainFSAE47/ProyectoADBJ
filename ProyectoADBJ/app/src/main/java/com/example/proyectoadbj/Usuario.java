@@ -15,6 +15,9 @@ public class Usuario implements Parcelable {
         this.genero = genero;
     }
 
+    public Usuario(){
+
+    }
     public String getEmail() {
         return email;
     }
@@ -23,9 +26,7 @@ public class Usuario implements Parcelable {
         this.email = email;
     }
 
-    public Usuario(){
 
-    }
 
     public String getNombres() {
         return nombres;
