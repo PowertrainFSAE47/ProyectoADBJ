@@ -37,26 +37,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DAO dao = new DAO(MainActivity.this);
 
-                if (txUser.getText().toString().trim().isEmpty()) {
+                String nombreUsuario=txUser.getText().toString().trim();
+                String passUsuario=txPassword.getText().toString().trim();
+
+                if (nombreUsuario.isEmpty()) {
                     //No ingresa user
                     errorHandler.Toaster(enumErrores.sinNombre, MainActivity.this);
-                } else if (txPassword.getText().toString().trim().isEmpty()) {
+                } else if (passUsuario.isEmpty()) {
                     // No ingresa password
                     errorHandler.Toaster(enumErrores.sinPassword, MainActivity.this);
                 } else {
 
-                    if (dao.checkUser(txUser.getText().toString().trim(),txPassword.getText().toString().trim())){
+                    if (dao.checkUser(nombreUsuario,passUsuario)){
                         // Login succesful
                         txUser.setText("");
                         txPassword.setText("");
                         Intent aDashboard = new Intent(MainActivity.this, Dashboard.class);
+                        // Obtener un objeto con el usuario logeado para transferirlo al dashboard
+                        aDashboard.putExtra("user",dao.retrieveUser(nombreUsuario));
                         startActivity(aDashboard);
                     }else{
                         // Usuario no existe.
                         errorHandler.Toaster(enumErrores.loginError, MainActivity.this);
                     }
-
-
 
                 }
             }

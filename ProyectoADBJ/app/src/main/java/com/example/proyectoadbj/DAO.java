@@ -63,7 +63,6 @@ public class DAO extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getReadableDatabase();
         String sql="SELECT COUNT (ID) FROM USUARIOS WHERE USUARIOS.USERNAME='"+user+"' AND USUARIOS.PASSWORD="+pass;
-        System.out.println(sql);
         Cursor datos=db.rawQuery(sql,null);
 
         if (datos.moveToNext()) {
@@ -71,5 +70,25 @@ public class DAO extends SQLiteOpenHelper {
         }else{
             return false;
         }
+    }
+
+    public Usuario retrieveUser(String username){
+
+        Usuario user=new Usuario();
+
+        // Obtener cursor.
+        SQLiteDatabase db=this.getReadableDatabase();
+        String sql="select * from usuarios where usuarios.username='"+username+"'";
+
+        Cursor datos=db.rawQuery(sql,null);
+
+        if (datos.moveToNext()) {
+            user.setNombres(datos.getString(1));
+            user.setUsername(datos.getString(2));
+            user.setPathFoto(datos.getString(4));
+        }
+
+        return user;
+
     }
 }

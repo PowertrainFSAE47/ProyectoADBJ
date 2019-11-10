@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 public class tabUser extends Fragment {
 
 
+    private Usuario user;
+
     public tabUser() {
         // Required empty public constructor
     }
