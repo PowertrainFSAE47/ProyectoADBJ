@@ -21,7 +21,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             android:orientation="vertical" />
 
         <LinearLayout
@@ -41,7 +41,7 @@
                 android:background="@drawable/edit_round"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="USUARIO"
+                android:hint="EMAIL"
                 android:inputType="textPersonName"
                 android:selectAllOnFocus="false" />
 
@@ -77,7 +77,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="274dp"
+            android:layout_height="252dp"
             android:gravity="bottom|left"
             android:orientation="vertical">
 

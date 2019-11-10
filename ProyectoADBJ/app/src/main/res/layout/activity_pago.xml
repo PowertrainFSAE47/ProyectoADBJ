@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#c8d6e5"
+        android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,11 +24,11 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:text="TUS DATOS"
             android:textAlignment="center"
-            android:textColor="#222f3e"
+            android:textColor="#25364F"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -46,9 +46,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_margin="5dp"
                 android:text="Pedrito de Los palotes"
                 android:textAlignment="center"
-                android:textColor="#222f3e"
+                android:textColor="#25364F"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -59,7 +60,7 @@
                 android:layout_weight="1"
                 android:text="pedrito@lospalotes.net"
                 android:textAlignment="center"
-                android:textColor="#222f3e"
+                android:textColor="#25364F"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
@@ -96,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="TARJETAS DE CREDITO"
-                    android:textColor="#222f3e"
+                    android:textColor="#25364F"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -105,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="TARJETAS DE DEBITO"
-                    android:textColor="#222f3e"
+                    android:textColor="#25364F"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -114,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="ONEPAY"
-                    android:textColor="#222f3e"
+                    android:textColor="#25364F"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -129,6 +130,19 @@
             android:padding="5dp">
 
             <Button
+                android:id="@+id/btNoPagar"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_round"
+                android:backgroundTint="#ee5253"
+                android:text="Volver"
+                android:textColor="#25364F"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Button
                 android:id="@+id/btPagar"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
@@ -138,20 +152,10 @@
                 android:backgroundTint="#1dd1a1"
                 android:text="Ir a pago"
                 android:textSize="20dp"
+                android:textColor="#25364F"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btNoPagar"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_round"
-                android:backgroundTint="#ee5253"
-                android:text="Volver"
-                android:textColor="#222f3e"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+
         </LinearLayout>
 
     </LinearLayout>

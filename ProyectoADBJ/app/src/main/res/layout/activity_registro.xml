@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#c8d6e5"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +28,7 @@
             android:layout_marginBottom="10dp"
             android:text="Únete a nosotros!"
             android:textAlignment="center"
-            android:textColor="#222f3e"
+            android:textColor="#25364F"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -45,8 +45,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Nombre"
-
-                android:textColor="#222f3e"
+                android:gravity="center_vertical"
+                android:textColor="#25364F"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/edit_round"
+                android:background="@drawable/edit_round_border"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="20dp" />
@@ -74,7 +74,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Apellidos"
-                android:textColor="#222f3e"
+                android:gravity="center_vertical"
+                android:textColor="#25364F"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -83,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/edit_round"
+                android:background="@drawable/edit_round_border"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:paddingLeft="20dp" />
@@ -102,7 +103,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Email"
-                android:textColor="#222f3e"
+                android:gravity="center_vertical"
+                android:textColor="#25364F"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -111,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/edit_round"
+                android:background="@drawable/edit_round_border"
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="20dp" />
@@ -128,8 +130,9 @@
                 android:layout_width="90dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Password"
-                android:textColor="#222f3e"
+                android:text="Contraseña"
+                android:gravity="center_vertical"
+                android:textColor="#25364F"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -138,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/edit_round"
+                android:background="@drawable/edit_round_border"
                 android:ems="10"
                 android:inputType="textPassword"
                 android:textAlignment="center" />
@@ -156,8 +159,9 @@
                 android:layout_width="90dp"
                 android:layout_height="66dp"
                 android:layout_weight="1"
-                android:text="Confirma tu password"
-                android:textColor="#222f3e"
+                android:text="Confirma tu Contraseña"
+                android:gravity="center_vertical"
+                android:textColor="#25364F"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -166,8 +170,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                android:background="@drawable/edit_round"
+                android:background="@drawable/edit_round_border"
                 android:ems="10"
+
                 android:inputType="textPassword"
                 android:textAlignment="center" />
 
@@ -185,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Género"
-                android:textColor="#222f3e"
+                android:textColor="#25364F"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -196,12 +201,12 @@
                 android:layout_weight="1">
 
                 <RadioButton
-                    android:checked="true"
                     android:id="@+id/rbMasculino"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:text="Masculino"
-                    android:textColor="#222f3e"
+                    android:textColor="#25364F"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -209,15 +214,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Femenino"
-                    android:textColor="#222f3e"
+                    android:textColor="#25364F"
                     android:textStyle="bold" />
 
                 <RadioButton
-                    android:id="@+id/rbTula"
+                    android:id="@+id/rbNoBinario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tengo tula y tetas"
-                    android:textColor="#222f3e"
+                    android:text="No Binario"
+                    android:textColor="#25364F"
                     android:textStyle="bold" />
 
 
@@ -232,6 +237,18 @@
             android:padding="5dp">
 
             <Button
+                android:id="@+id/btCancelarSub"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_round"
+                android:backgroundTint="#ee5253"
+                android:text="Cancelar"
+                android:textColor="#25364F"
+                android:textSize="18dp" />
+
+            <Button
                 android:id="@+id/btAceptarSub"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
@@ -240,18 +257,7 @@
                 android:background="@drawable/edit_round"
                 android:backgroundTint="#1dd1a1"
                 android:text="Formas de pago"
-                android:textSize="18dp" />
-
-            <Button
-                android:id="@+id/btCancelarSub"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/edit_round"
-                android:backgroundTint="#ee5253"
-                android:text="Volver"
-                android:textColor="#222f3e"
+                android:textColor="#25364F"
                 android:textSize="18dp" />
         </LinearLayout>
 
