@@ -1,0 +1,41 @@
+Base de datos
+
+// Inserciones de tablas
+
+// Roles
+insert into roles values (null,"usuario")
+insert into roles values (null,"trainer")
+insert into roles values (null,"admin")
+
+// Planes
+insert into planes values (null, "Mr Olympia Plus",100000,"Plan primer nivel")
+insert into planes values (null, "Mr Olympia",80000,"Plan segundo nivel")
+insert into planes values (null, "John Rambo",50000,"Plan tercer nivel")
+insert into planes values (null, "Transporter",30000,"Plan cuarto nivel")
+insert into planes values (null, "Remy Gaillard",15000,"Plan penca")
+
+// Usuarios
+
+insert into usuarios values (null,'Arnold', 'Schwarzenegger','terminator2',123,'hombre','awhnold@califohnia.gov','drawable/1','555-555-555',2,1)
+insert into usuarios values (null,'Sylvester', 'Stallone','italianstallion',456,'hombre','sly@rambo.com','drawable/2','555-555-555',2,1)
+insert into usuarios values (null,'Gordon', 'Freeman','halflifer',123,'hombre','gordon.freeman@blackmesa.gov','drawable/3','555-555-555',2,1)
+insert into usuarios values (null,'Jason', 'Statham','transporter86',123,'hombre','baldguy@hitman.com','drawable/4','555-555-555',2,1)
+insert into usuarios values (null,'Adrian','Nario','acm1pt',123,'hombre','lanegranoshace2x1@bananero.net','drawable/5','555-555-555',2,4);
+
+
+
+// Trainings
+
+insert into trainings values (null, "Pesas",1,"drawable/t1")
+insert into trainings values (null, "Spinning",2,"drawable/t2")
+insert into trainings values (null, "Yoga",2,"drawable/t3")
+insert into trainings values (null, "Zumba",2,"drawable/t4")
+insert into trainings values (null, "Aerobics",2,"drawable/t5")
+
+
+
+
+Pantalla LOGIN
+
+1- Habilitar validacion de usuario y password.
+2-
