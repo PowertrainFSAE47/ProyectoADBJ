@@ -14,8 +14,9 @@ public class queryDump {
     public String createTipos = "CREATE TABLE 'tipos' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL )";
     public String createTrainings = "CREATE TABLE 'trainings' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'id_tipo' INTEGER NOT NULL, 'path_foto' TEXT NOT NULL, FOREIGN KEY('id_tipo') REFERENCES 'tipos'('id') )";
 
-    public String createUsuarios = "CREATE TABLE 'usuarios' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'username' TEXT NOT NULL, 'password' INTEGER NOT NULL" +
-            ", 'path_foto' TEXT NOT NULL, 'id_rol' INTEGER NOT NULL, 'id_plan' INTEGER NOT NULL, FOREIGN KEY('id_rol') REFERENCES 'roles'('id'), FOREIGN KEY('id_plan') REFERENCES 'planes'('id') )";
+    public String createUsuarios = "CREATE TABLE 'usuarios' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'apellidos' TEXT NOT NULL, 'username' TEXT NOT NULL," +
+            " 'password' TEXT NOT NULL, 'genero' TEXT NOT NULL, 'email' TEXT NOT NULL, 'path_foto' TEXT NOT NULL," +
+            " 'telefono' TEXT NOT NULL, 'id_rol' INTEGER NOT NULL, 'id_plan' INTEGER NOT NULL, FOREIGN KEY('id_rol') REFERENCES 'roles'('id'), FOREIGN KEY('id_plan') REFERENCES 'planes'('id') )";
 
     public String createClases = "CREATE TABLE 'clases' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fecha' TEXT NOT NULL, 'hora_inicio' INTEGER NOT NULL, 'hora_fin' INTEGER NOT NULL," +
             " 'id_training' INTEGER NOT NULL, 'id_usuarios' INTEGER NOT NULL, FOREIGN KEY('id_training') REFERENCES 'trainings'('id'), FOREIGN KEY('id_usuarios') REFERENCES 'usuarios'('id') )";
@@ -52,11 +53,12 @@ public class queryDump {
 
     public String[] initUsuarios={
 
-            "insert into usuarios values (null,'Arnold Schwarzenegger','terminator2',123,'drawable/1',2,1)",
-            "insert into usuarios values (null,'Sylvester Stallone','italianstallion',456,'drawable/2',2,1)",
-            "insert into usuarios values (null,'John Rambo','johnsalchichon',789,'drawable/3',1,1)",
-            "insert into usuarios values (null,'Jason Statham','transporter86',123,'drawable/4',2,4)",
-            "insert into usuarios values (null,'El Bananero','acm1pt',123,'drawable/4',2,4)"
+            
+            "insert into usuarios values (null,'Arnold', 'Schwarzenegger','terminator2',123,'hombre','awhnold@califohnia.gov','drawable/1','555-555-555',2,1)",
+            "insert into usuarios values (null,'Sylvester', 'Stallone','italianstallion',456,'hombre','sly@rambo.com','drawable/2','555-555-555',2,1)",
+            "insert into usuarios values (null,'Gordon', 'Freeman','halflifer',123,'hombre','gordon.freeman@blackmesa.gov','drawable/3','555-555-555',2,1)",
+            "insert into usuarios values (null,'Jason', 'Statham','transporter86',123,'hombre','baldguy@hitman.com','drawable/4','555-555-555',2,1)",
+            "insert into usuarios values (null,'Adrian','Nario','acm1pt',123,'hombre','lanegranoshace2x1@bananero.net','drawable/5','555-555-555',2,4);"
     };
 
     public String[] initTrainings= {
@@ -66,6 +68,10 @@ public class queryDump {
             "insert into trainings values (null, 'Yoga',2,'drawable/t3')",
             "insert into trainings values (null, 'Zumba',2,'drawable/t4')",
             "insert into trainings values (null, 'Aerobics',2,'drawable/t5')"
+    };
+
+    public String[] dropTables= {
+            "DROP TABLE IF EXISTS USUARIOS",
     };
 
 }
