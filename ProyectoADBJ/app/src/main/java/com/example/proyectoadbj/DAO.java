@@ -84,12 +84,11 @@ public class DAO extends SQLiteOpenHelper {
 
         if (datos.moveToNext()) {
 
-            Usuario usuario=new Usuario(
-
+            Usuario Usuario =new Usuario(
                     datos.getString(1),
                     datos.getString(2),
                     datos.getString(3),
-                    datos.getString(4),
+                       datos.getString(4),
                     datos.getString(5),
                     datos.getString(6),
                     datos.getString(7));
