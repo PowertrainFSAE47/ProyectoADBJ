@@ -84,14 +84,13 @@ public class DAO extends SQLiteOpenHelper {
 
         if (datos.moveToNext()) {
 
-            Usuario Usuario =new Usuario(
-                    datos.getString(1),
-                    datos.getString(2),
-                    datos.getString(3),
-                       datos.getString(4),
-                    datos.getString(5),
-                    datos.getString(6),
-                    datos.getString(7));
+            user.setNombres(datos.getString(1));
+            user.setApellidos(datos.getString(2));
+            user.setUsername(datos.getString(3));
+            user.setPassword(datos.getString(4));
+            user.setGenero(datos.getString(5));
+            user.setEmail(datos.getString(6));
+            user.setPathFoto(datos.getString(7));
         }
 
         return user;

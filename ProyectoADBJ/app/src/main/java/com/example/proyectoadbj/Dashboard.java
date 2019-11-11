@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -13,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class Dashboard extends AppCompatActivity {
 
-    private TabLayout tlDashboard;
+    private TabLayout dashTabLayout;
     private ViewPager dashViewPager;
     private TabItem tabUser, tabStats, tabClases, tabTrainers, tabMaquinas;
     private PagerAdapter pgAdapter;
@@ -29,39 +30,48 @@ public class Dashboard extends AppCompatActivity {
         Intent desdeLogin = getIntent();
         Usuario user = desdeLogin.getParcelableExtra("user");
 
+        // Paso de argumentos a los fragmentos.
+
+        final Bundle bundleTabUser=new Bundle();
+        bundleTabUser.putParcelable("user",user);
+
+
+        //TabLayout y ViewPager
+        dashTabLayout = (TabLayout) findViewById(R.id.dashTabLayout);
+        dashViewPager = (ViewPager) findViewById(R.id.dashViewPager);
 
         // Importacion de elementos de la interfaz.
-        tlDashboard = (TabLayout) findViewById(R.id.tlDashboard);
         tabUser = (TabItem) findViewById(R.id.tabUser);
         tabStats = (TabItem) findViewById(R.id.tabStats);
         tabClases = (TabItem) findViewById(R.id.tabClases);
         tabTrainers = (TabItem) findViewById(R.id.tabTrainers);
         tabMaquinas = (TabItem) findViewById(R.id.tabMaquinas);
-        dashViewPager = (ViewPager) findViewById(R.id.dashViewPager);
+
         lblUser=(TextView) findViewById(R.id.lblUser);
+
 
 
         //Inicialización de elementos de la interfaz.
         lblUser.setText(user.getUsername());
 
-        // Paso de argumentos a los fragmentos.
 
 
 
-        pgAdapter = new pgAdapter(getSupportFragmentManager(), tlDashboard.getTabCount());
+
+        pgAdapter = new pgAdapter(getSupportFragmentManager(), dashTabLayout.getTabCount());
         dashViewPager.setAdapter(pgAdapter);
 
-        tlDashboard.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        dashTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int tabPosition = tab.getPosition();
                 dashViewPager.setCurrentItem(tabPosition);
 
-
                 switch (tabPosition) {
                     case 0:
-                        // tabUser
-
+                        // TabUser
+                        Fragment activeFragment=getSupportFragmentManager().findFragmentById(R.id.tabUser);
+                        activeFragment.setArguments(bundleTabUser);
                         pgAdapter.notifyDataSetChanged();
                     case 1:
                         pgAdapter.notifyDataSetChanged();
@@ -87,7 +97,7 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        dashViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tlDashboard));
+        dashViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(dashTabLayout));
 
     }
 }
