@@ -5,19 +5,39 @@ import android.os.Parcelable;
 
 public class Usuario implements Parcelable {
 
-    private String nombres,apellidos,password,genero,email;
-
-
-    public Usuario(String nombres, String apellidos, String password, String genero) {
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.password = password;
-        this.genero = genero;
-    }
+    private String nombres,apellidos,password,genero,email,pathFoto,username;
 
     public Usuario(){
 
     }
+
+    public Usuario(String nombres, String apellidos, String username, String password, String genero, String email, String pathFoto) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.password = password;
+        this.genero = genero;
+        this.email = email;
+        this.pathFoto = pathFoto;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
+    public String getPathFoto() {
+        return pathFoto;
+    }
+
+    public void setPathFoto(String pathFoto) {
+        this.pathFoto = pathFoto;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -72,6 +92,8 @@ public class Usuario implements Parcelable {
         dest.writeString(this.password);
         dest.writeString(this.genero);
         dest.writeString(this.email);
+        dest.writeString(this.pathFoto);
+        dest.writeString(this.username);
     }
 
     protected Usuario(Parcel in) {
@@ -80,9 +102,11 @@ public class Usuario implements Parcelable {
         this.password = in.readString();
         this.genero = in.readString();
         this.email = in.readString();
+        this.pathFoto = in.readString();
+        this.username = in.readString();
     }
 
-    public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
         @Override
         public Usuario createFromParcel(Parcel source) {
             return new Usuario(source);

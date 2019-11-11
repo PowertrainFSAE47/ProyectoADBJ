@@ -45,7 +45,7 @@ public class DAO extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        runSQlFromArray(q.dropTables,db);
     }
 
     // Data access object
@@ -63,7 +63,6 @@ public class DAO extends SQLiteOpenHelper {
     {
         SQLiteDatabase db=this.getReadableDatabase();
         String sql="SELECT COUNT (ID) FROM USUARIOS WHERE USUARIOS.USERNAME='"+user+"' AND USUARIOS.PASSWORD="+pass;
-        System.out.println(sql);
         Cursor datos=db.rawQuery(sql,null);
 
         if (datos.moveToNext()) {
@@ -72,4 +71,31 @@ public class DAO extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    public Usuario retrieveUser(String username){
+
+        Usuario user=new Usuario();
+
+        // Obtener cursor.
+        SQLiteDatabase db=this.getReadableDatabase();
+        String sql="select * from usuarios where usuarios.username='"+username+"'";
+
+        Cursor datos=db.rawQuery(sql,null);
+
+        if (datos.moveToNext()) {
+
+            Usuario Usuario =new Usuario(
+                    datos.getString(1),
+                    datos.getString(2),
+                    datos.getString(3),
+                       datos.getString(4),
+                    datos.getString(5),
+                    datos.getString(6),
+                    datos.getString(7));
+        }
+
+        return user;
+
+    }
+
 }
