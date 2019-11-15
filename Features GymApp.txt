@@ -55,5 +55,15 @@ cardio step
 spinning
 
 
+Menus requeridos. 
 
-Estructura general de la base de datos
+Menu reservar clases. 
+Homogeneizar gráficamente todos los menus
+Menu de seleccionar plan y pago
+Menu de calendario del día para instructores
+Menú de calendario del día para usuarios
+
+
+El menú de calendario es más práctico hacerlo
+Como los calendarios diarios de google. Una tabla con todas las horas y marcar eventos
+
