@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class pgAdapter extends FragmentPagerAdapter {
+public class fragmentPagerAdapter extends FragmentPagerAdapter {
 
     private int numTabs;
+    private String activeUserName;
 
-    public pgAdapter(FragmentManager fm,int numTabs) {
+
+    public fragmentPagerAdapter(FragmentManager fm, int numTabs,String activeUserName) {
         super(fm);
         this.numTabs=numTabs;
+        this.activeUserName=activeUserName;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class pgAdapter extends FragmentPagerAdapter {
 
         switch(position) {
             case 0:
-                return new tabUser();
+                return fragmentUser.crearFragmentUser(activeUserName);
             case 1:
                 return new tabStats();
             case 2:

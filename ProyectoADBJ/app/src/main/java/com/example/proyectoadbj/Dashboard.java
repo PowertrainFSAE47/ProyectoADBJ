@@ -2,10 +2,10 @@ package com.example.proyectoadbj;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -14,8 +14,8 @@ import com.google.android.material.tabs.TabLayout;
 
 public class Dashboard extends AppCompatActivity {
 
-    private TabLayout dashTabLayout;
-    private ViewPager dashViewPager;
+    // Con asistencia de https://guides.codepath.com/android/Google-Play-Style-Tabs-using-TabLayout
+
     private TabItem tabUser, tabStats, tabClases, tabTrainers, tabMaquinas;
     private PagerAdapter pgAdapter;
     private TextView lblUser;
@@ -28,76 +28,25 @@ public class Dashboard extends AppCompatActivity {
 
         // Importacion del objeto user desde el login
         Intent desdeLogin = getIntent();
-        Usuario user = desdeLogin.getParcelableExtra("user");
-
-        // Paso de argumentos a los fragmentos.
-
-        final Bundle bundleTabUser=new Bundle();
-        bundleTabUser.putParcelable("user",user);
-
-
-        //TabLayout y ViewPager
-        dashTabLayout = (TabLayout) findViewById(R.id.dashTabLayout);
-        dashViewPager = (ViewPager) findViewById(R.id.dashViewPager);
-
-        // Importacion de elementos de la interfaz.
-        tabUser = (TabItem) findViewById(R.id.tabUser);
-        tabStats = (TabItem) findViewById(R.id.tabStats);
-        tabClases = (TabItem) findViewById(R.id.tabClases);
-        tabTrainers = (TabItem) findViewById(R.id.tabTrainers);
-        tabMaquinas = (TabItem) findViewById(R.id.tabMaquinas);
-
-        lblUser=(TextView) findViewById(R.id.lblUser);
-
-
+        final Usuario user = desdeLogin.getParcelableExtra("user");
 
         //Inicialización de elementos de la interfaz.
+        lblUser = (TextView) findViewById(R.id.lblUser);
         lblUser.setText(user.getUsername());
 
+        //TabLayout
+        TabLayout dashTabLayout = (TabLayout) findViewById(R.id.dashTabLayout);
+        // dashViewPager es el ViewPager definido en el XML
+        ViewPager dashViewPager = (ViewPager) findViewById(R.id.dashViewPager);
 
 
+        // Obtener el ViewPager y setear su PagerAdapter para que pueda mostrar elementos
+        PagerAdapter pagerAdapter = new fragmentPagerAdapter(getSupportFragmentManager(), dashTabLayout.getTabCount(), user.getUsername());
+        dashViewPager.setAdapter(pagerAdapter);
 
+        // Give the TabLayout the ViewPager
 
-        pgAdapter = new pgAdapter(getSupportFragmentManager(), dashTabLayout.getTabCount());
-        dashViewPager.setAdapter(pgAdapter);
-
-        dashTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int tabPosition = tab.getPosition();
-                dashViewPager.setCurrentItem(tabPosition);
-
-                switch (tabPosition) {
-                    case 0:
-                        // TabUser
-                        Fragment activeFragment=getSupportFragmentManager().findFragmentById(R.id.tabUser);
-                        activeFragment.setArguments(bundleTabUser);
-                        pgAdapter.notifyDataSetChanged();
-                    case 1:
-                        pgAdapter.notifyDataSetChanged();
-                    case 2:
-                        pgAdapter.notifyDataSetChanged();
-                    case 3:
-                        pgAdapter.notifyDataSetChanged();
-                    case 4:
-                        pgAdapter.notifyDataSetChanged();
-                    case 5:
-                        pgAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        dashViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(dashTabLayout));
+        dashTabLayout.setupWithViewPager(dashViewPager);
 
     }
 }
