@@ -83,6 +83,7 @@ public class menuRegistro extends AppCompatActivity {
 
 
 
+                // Muchos condicionales aca, mejorable.
                 if (stackErrores.empty()) {
 
                     // Crear usuario
@@ -99,29 +100,21 @@ public class menuRegistro extends AppCompatActivity {
                     // Implementar toma/upload de fotos, se podrá?
                     user.setPathFoto("p0");
 
-                    // Usuario debe ser enviado a la base de datos o algo.
-
-                    // Conexion a BD. Importante try catch en DAO, no existe
-
-
-                    if (dao.registerUser(user)){
+                    // Verificacion de usuario existente
+                    if (dao.checkUser(user.getUsername(),user.getPassword())) {
+                        // User existe.
+                        errorHandler.Toaster(enumErrores.usuarioYaExiste,menuRegistro.this);
+                    }else if(dao.registerUser(user)){
                         errorHandler.Toaster(enumErrores.registroExitoso,menuRegistro.this);
                         Intent aMenuPago = new Intent(menuRegistro.this, menuPago.class);
                         aMenuPago.putExtra("user",user);
                         startActivity(aMenuPago);
-                    }else{
-                        errorHandler.Toaster(enumErrores.errorDeRegistro,menuRegistro.this);
+                    }else {
+                        errorHandler.Toaster(enumErrores.errorDeRegistro, menuRegistro.this);
                     }
-
-
-
-
-
                 } else {
                     errorHandler.Toaster(stackErrores.lastElement(), menuRegistro.this);
                 }
-
-
             }
         });
 

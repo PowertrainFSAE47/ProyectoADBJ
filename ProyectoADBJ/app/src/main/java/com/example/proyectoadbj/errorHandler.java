@@ -52,6 +52,9 @@ public class errorHandler {
             case sinUserName:
                 myToast.makeText(context, "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT).show();
                 break;
+            case usuarioYaExiste:
+                myToast.makeText(context, "El usuario ya existe en el sistema", Toast.LENGTH_SHORT).show();
+                break;
             default:
                 Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show();
         }

@@ -11,5 +11,6 @@ public enum enumErrores {
     sinEmail,
     errorDeRegistro,
     registroExitoso,
-    sinUserName
+    sinUserName,
+    usuarioYaExiste
 }
