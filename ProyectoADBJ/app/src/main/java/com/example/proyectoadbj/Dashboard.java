@@ -3,6 +3,7 @@ package com.example.proyectoadbj;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +17,6 @@ public class Dashboard extends AppCompatActivity {
 
     // Con asistencia de https://guides.codepath.com/android/Google-Play-Style-Tabs-using-TabLayout
 
-    private TabItem tabUser, tabStats, tabClases, tabTrainers, tabMaquinas;
-    private PagerAdapter pgAdapter;
-    private TextView lblUser;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +28,14 @@ public class Dashboard extends AppCompatActivity {
         final Usuario user = desdeLogin.getParcelableExtra("user");
 
         //Inicialización de elementos de la interfaz.
-        lblUser = (TextView) findViewById(R.id.lblUser);
-        lblUser.setText(user.getUsername());
+        TextView lblUserDash = findViewById(R.id.lblUserDash);
+        TextView lblNombreDash=findViewById(R.id.lblNombreDash);
+        ImageView imgUserDash=findViewById(R.id.imgUserDash);
+        lblUserDash.setText(user.getUsername());
+        lblNombreDash.setText(user.getNombres() + " " + user.getApellidos());
+        // Foto del usuario
+        int id = getResources().getIdentifier("com.example.proyectoadbj:drawable/" + user.getPathFoto(), null, null);
+        imgUserDash.setImageResource(id);
 
         //TabLayout
         TabLayout dashTabLayout = (TabLayout) findViewById(R.id.dashTabLayout);

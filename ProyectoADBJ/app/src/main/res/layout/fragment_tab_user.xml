@@ -18,10 +18,10 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/lblUserName"
+                android:id="@+id/lblNombre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Arnold Schwarzenegger"
+                android:text="@string/nombreApellido"
                 android:textColor="@android:color/black"
                 android:textSize="35sp"
                 android:shadowColor="@color/text_shadow"
@@ -30,9 +30,10 @@
                 android:shadowRadius="8"/>
 
             <TextView
+                android:id="@+id/lblUserName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Chile"
+                android:text="@string/username"
                 android:textColor="@android:color/black"
                 android:textSize="25sp"
                 android:shadowColor="@color/text_shadow"
@@ -40,30 +41,40 @@
                 android:shadowDy="0"
                 android:shadowRadius="8"/>
 
+            <TextView
+                android:id="@+id/lblEmail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="15dp"
+                android:text="@string/email"
+                android:textColor="@android:color/black"
+                android:textSize="25sp" />
+
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imgUserPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="20dp"
-                android:src="@drawable/arnold" />
+                android:src="@drawable/img1"/>
 
             <TextView
+                android:id="@+id/lblPlan"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="50dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
                 android:paddingBottom="10dp"
                 android:text="Plan Mr Olimpia Plus"
                 android:textColor="@android:color/black"
                 android:textSize="25sp" />
 
             <TextView
+                android:id="@+id/lblFechasPlan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="15dp"
                 android:text="Desde 10/10/2018 a 10/10/2020"
                 android:textColor="@android:color/black"
                 android:textSize="25sp" />
-
 
         </LinearLayout>
     </ScrollView>

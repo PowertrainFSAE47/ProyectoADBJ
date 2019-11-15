@@ -97,4 +97,18 @@ public class DAO extends SQLiteOpenHelper {
 
     }
 
+    public String getPlan(String username)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        String sql="select planes.nombre from planes,usuarios where planes.id=usuarios.id_plan and usuarios.username='"+username+"'";
+        Cursor datos=db.rawQuery(sql,null);
+
+        if (datos.moveToNext()) {
+            return datos.getString(0);
+        }else{
+            return "NO AFILIADO";
+        }
+    }
+
+
 }

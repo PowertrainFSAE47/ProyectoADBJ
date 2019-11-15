@@ -1,7 +1,9 @@
 package com.example.proyectoadbj;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,18 +13,18 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
+
+import java.io.InputStream;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class fragmentUser extends Fragment {
-
-    // Controles
-    private TextView lblUserName;
 
     // Parametros
     private Usuario user;
@@ -66,17 +68,36 @@ public class fragmentUser extends Fragment {
 
     private void initUserFragment(ViewGroup container, View view){
 
+
         //Views y controles
-        lblUserName=(TextView)view.findViewById(R.id.lblUserName);
+        TextView lblNombre=view.findViewById(R.id.lblNombre);
+        TextView lblUserName=view.findViewById(R.id.lblUserName);
+        TextView lblPlan=view.findViewById(R.id.lblPlan);
+        ImageView imgUserPhoto=view.findViewById(R.id.imgUserPhoto);
+        TextView lblEmail=view.findViewById(R.id.lblEmail);
+        TextView lblFechasPlan=view.findViewById(R.id.lblFechasPlan);
+
+        // Viñeta superior
+
 
         // Conexion a BD.
         DAO dao = new DAO(container.getContext());
         Usuario user = dao.retrieveUser(activeUserName);
-        // A quien encontramos acá?
-        System.out.println("Encontrado usuario: " + user.getNombres() + " " + user.getApellidos());
-        // Actualizar los controles encontrados en el fragment.
-        lblUserName.setText(user.getNombres() + " " + user.getApellidos());
-        // Añadir resto de inicializaciones.
+        // Nombre y apellido
+        lblNombre.setText(user.getNombres() + " " + user.getApellidos());
+        // username
+        lblUserName.setText(activeUserName);
+        // Foto del usuario
+        int id = getResources().getIdentifier("com.example.proyectoadbj:drawable/" + user.getPathFoto(), null, null);
+        imgUserPhoto.setImageResource(id);
+        // Tipo de plan
+        lblPlan.setText("Tu plan: "+dao.getPlan(activeUserName));
+        // Fechas de plan
+        lblFechasPlan.setText("Desde: //implementar DAO.getfechas");
+
+        // Email
+        lblEmail.setText(user.getEmail());
+
     }
 
     public fragmentUser() {

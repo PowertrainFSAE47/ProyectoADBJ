@@ -1,8 +1,11 @@
 package com.example.proyectoadbj;
 
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class UIHelpers {
 
@@ -17,4 +20,5 @@ public class UIHelpers {
         RadioButton r = (RadioButton) rg.getChildAt(idx);
         return r.getText().toString();
     }
+
 }

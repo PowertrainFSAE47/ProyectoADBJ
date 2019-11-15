@@ -54,11 +54,11 @@ public class queryDump {
     public String[] initUsuarios={
 
             
-            "insert into usuarios values (null,'Arnold', 'Schwarzenegger','terminator2',123,'hombre','awhnold@califohnia.gov','drawable/1','555-555-555',2,1)",
-            "insert into usuarios values (null,'Sylvester', 'Stallone','italianstallion',456,'hombre','sly@rambo.com','drawable/2','555-555-555',2,1)",
-            "insert into usuarios values (null,'Gordon', 'Freeman','halflifer',123,'hombre','gordon.freeman@blackmesa.gov','drawable/3','555-555-555',2,1)",
-            "insert into usuarios values (null,'Jason', 'Statham','transporter86',123,'hombre','baldguy@hitman.com','drawable/4','555-555-555',2,1)",
-            "insert into usuarios values (null,'Adrian','Nario','acm1pt',123,'hombre','lanegranoshace2x1@bananero.net','drawable/5','555-555-555',2,4);"
+            "insert into usuarios values (null,'Arnold', 'Schwarzenegger','terminator2',123,'hombre','awhnold@califohnia.gov','img1','555-555-555',2,1)",
+            "insert into usuarios values (null,'Sylvester', 'Stallone','italianstallion',456,'hombre','sly@rambo.com','img2','555-555-555',2,2)",
+            "insert into usuarios values (null,'Gordon', 'Freeman','halflifer',123,'hombre','gordon.freeman@blackmesa.gov','img3','555-555-555',2,3)",
+            "insert into usuarios values (null,'Jason', 'Statham','transporter86',123,'hombre','baldguy@hitman.com','img4','555-555-555',2,4)",
+            "insert into usuarios values (null,'Adrian','Nario','elbananero',123,'hombre','lanegranoshace2x1@bananero.net','img5','555-555-555',2,4);"
     };
 
     public String[] initTrainings= {
@@ -73,5 +73,7 @@ public class queryDump {
     public String[] dropTables= {
             "DROP TABLE IF EXISTS USUARIOS",
     };
+
+
 
 }

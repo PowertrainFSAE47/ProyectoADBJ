@@ -24,4 +24,16 @@
     <string name="tabTrainers">Aqui consultas trainers y agendas con ellos</string>
     <string name="tabMaquinas">Aqui se muestran las máquinas y consejos para su uso</string>
 
+    <!-- Strings globales de propiedad de usuario -->
+    <string name="nombre">Pedrito</string>
+    <string name="apellido">De Los Palotes</string>
+    <string name="nombreApellido">Pedrito de los Palotes</string>
+    <string name="username">ppalotes</string>
+    <string name="email">pedrito@palotes.net</string>
+    <string name="telefono">+569 7553 6814</string>
+
+
+
+
+
 </resources>

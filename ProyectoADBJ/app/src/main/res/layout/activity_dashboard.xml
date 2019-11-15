@@ -16,13 +16,13 @@
         android:background="@color/gymFondo">
 
         <ImageView
-            android:id="@+id/imgUser"
+            android:id="@+id/imgUserDash"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:padding="5dp"
-            app:srcCompat="@drawable/arnold" />
+            app:srcCompat="@drawable/img1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,22 +33,22 @@
             android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/lblUser"
+                android:id="@+id/lblNombreDash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="PowerLifter69"
+                android:text="@string/nombreApellido"
                 android:textColor="@android:color/white"
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/lblLocation"
+                android:id="@+id/lblUserDash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_weight="1"
-                android:text="Chile"
+                android:text="@string/username"
 
                 android:textColor="@android:color/white"
                 android:textSize="16dp" />
