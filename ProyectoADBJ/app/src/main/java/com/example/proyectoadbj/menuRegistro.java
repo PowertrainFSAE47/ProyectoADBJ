@@ -17,9 +17,10 @@ public class menuRegistro extends AppCompatActivity {
 
     private TextView txNombres;
     private TextView txApellidos;
-    private TextView txMail;
+    //private TextView txMail;
     private TextView txPassword;
     private TextView txRepetirPassword;
+    private TextView txUserNameRegistro;
 
 
     private Button btAceptarSub;
@@ -32,18 +33,18 @@ public class menuRegistro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        txNombres = findViewById(R.id.txNombres);
-        txApellidos = findViewById(R.id.txApellidos);
-        txMail = findViewById(R.id.txMail);
-        txPassword = findViewById(R.id.txPassword);
+        txNombres = findViewById(R.id.txNombreRegistro);
+        txApellidos = findViewById(R.id.txApellidosRegistro);
+        //txMail = findViewById(R.id.txUserNameRegistro);
+        txUserNameRegistro=findViewById(R.id.txUserNameRegistro);
+        txPassword = findViewById(R.id.txPasswordRegistro);
         txRepetirPassword = findViewById(R.id.txRepetirPassword);
         btAceptarSub = findViewById(R.id.btAceptarSub);
         btCancelarSub = findViewById(R.id.btCancelarSub);
         rgGenero=findViewById(R.id.rgGenero);
 
-
-        // Almacenar claves
-
+        //Acceso a BD
+        final DAO dao = new DAO(menuRegistro.this);
 
         btAceptarSub.setOnClickListener(new View.OnClickListener() {
             Stack<enumErrores> stackErrores = new Stack<>();
@@ -64,10 +65,10 @@ public class menuRegistro extends AppCompatActivity {
                 } else {
                     stackErrores.remove(enumErrores.sinApellido);
                 }
-                if (txMail.getText().toString().trim().isEmpty()) {
-                    stackErrores.add(enumErrores.sinEmail);
+                if (txUserNameRegistro.getText().toString().trim().isEmpty()) {
+                    stackErrores.add(enumErrores.sinUserName);
                 } else {
-                    stackErrores.remove(enumErrores.sinEmail);
+                    stackErrores.remove(enumErrores.sinUserName);
                 }
                 if (password.isEmpty()) {
                     stackErrores.add(enumErrores.sinPassword);
@@ -81,23 +82,41 @@ public class menuRegistro extends AppCompatActivity {
                 }
 
 
+
                 if (stackErrores.empty()) {
 
                     // Crear usuario
 
-                    Usuario myUser = new Usuario();
-                    myUser.setNombres(txNombres.getText().toString().trim());
-                    myUser.setApellidos(txApellidos.getText().toString().trim());
-                    myUser.setGenero(UIHelpers.getSelectedRadioText(rgGenero));
-                    myUser.setPassword(txApellidos.getText().toString().trim());
-                    myUser.setEmail(txMail.getText().toString().trim());
+                    Usuario user = new Usuario();
+                    user.setNombres(txNombres.getText().toString().trim());
+                    user.setApellidos(txApellidos.getText().toString().trim());
+                    user.setGenero(UIHelpers.getSelectedRadioText(rgGenero));
+                    // Falta Casilla Email
+                    user.setEmail(txUserNameRegistro.getText().toString().trim());
+
+                    user.setPassword(txRepetirPassword.getText().toString().trim());
+                    user.setUsername(txUserNameRegistro.getText().toString().trim());
+                    // Implementar toma/upload de fotos, se podrá?
+                    user.setPathFoto("p0");
 
                     // Usuario debe ser enviado a la base de datos o algo.
 
+                    // Conexion a BD. Importante try catch en DAO, no existe
 
-                    Intent aMenuPago = new Intent(menuRegistro.this, menuPago.class);
-                    aMenuPago.putExtra("myUser",myUser);
-                    startActivity(aMenuPago);
+
+                    if (dao.registerUser(user)){
+                        errorHandler.Toaster(enumErrores.registroExitoso,menuRegistro.this);
+                        Intent aMenuPago = new Intent(menuRegistro.this, menuPago.class);
+                        aMenuPago.putExtra("user",user);
+                        startActivity(aMenuPago);
+                    }else{
+                        errorHandler.Toaster(enumErrores.errorDeRegistro,menuRegistro.this);
+                    }
+
+
+
+
+
                 } else {
                     errorHandler.Toaster(stackErrores.lastElement(), menuRegistro.this);
                 }

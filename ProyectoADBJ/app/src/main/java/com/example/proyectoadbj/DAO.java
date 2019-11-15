@@ -111,4 +111,25 @@ public class DAO extends SQLiteOpenHelper {
     }
 
 
+    public boolean registerUser(Usuario user) {
+
+        SQLiteDatabase db=this.getWritableDatabase();
+
+        String sql="insert into usuarios values (null,'"
+                +user.getNombres()+"','"
+                +user.getApellidos()+"','"
+                +user.getUsername()+"','"
+                +user.getPassword()+"','"
+                +user.getGenero()+"','"
+                +user.getEmail()+"','"
+                +user.getPathFoto()+"',"
+                +"'55555',1,1)";
+        try {
+            System.out.println("Registrando usuario: "+sql);
+            db.execSQL(sql);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
 }

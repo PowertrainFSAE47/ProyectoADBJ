@@ -39,7 +39,7 @@ public class menuPago extends AppCompatActivity {
 
         //Obtener intent
         Intent intentRegistro = getIntent();
-        Usuario myUser = intentRegistro.getParcelableExtra("myUser");
+        Usuario myUser = intentRegistro.getParcelableExtra("user");
 
         // Actualizar datos registrados.
         lbNombreRegistrado.setText(myUser.getNombres()+" "+myUser.getApellidos());

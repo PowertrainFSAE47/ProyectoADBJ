@@ -8,5 +8,8 @@ public enum enumErrores {
     sinPassword,
     loginError,
     noImplementado,
-    sinEmail
+    sinEmail,
+    errorDeRegistro,
+    registroExitoso,
+    sinUserName
 }

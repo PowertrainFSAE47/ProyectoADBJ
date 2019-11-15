@@ -43,12 +43,21 @@ public class errorHandler {
             case noImplementado:
                 myToast.makeText(context, "Funcionalidad no implementada", Toast.LENGTH_SHORT).show();
                 break;
+            case errorDeRegistro:
+                myToast.makeText(context, "ERROR DE REGISTRO!", Toast.LENGTH_SHORT).show();
+                break;
+            case registroExitoso:
+                myToast.makeText(context, "Registro Exitoso!", Toast.LENGTH_SHORT).show();
+                break;
+            case sinUserName:
+                myToast.makeText(context, "Debe introducir un nombre de usuario", Toast.LENGTH_SHORT).show();
+                break;
             default:
                 Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public static void alert(enumErrores err,Context context){
+    public static void alert(enumErrores err, Context context) {
         switch (err) {
             case loginError:
                 break;
