@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 public class DAO extends SQLiteOpenHelper {
 
     //Nombre de la base de datos.
@@ -25,20 +23,22 @@ public class DAO extends SQLiteOpenHelper {
 
         // Creacion de todas las tablas
 
+        db.execSQL(q.createUsuarios);
         db.execSQL(q.createRoles);
         db.execSQL(q.createPlanes);
-        db.execSQL(q.createTipos);
+        db.execSQL(q.createAfiliaciones);
         db.execSQL(q.createTrainings);
-        db.execSQL(q.createUsuarios);
-        db.execSQL(q.createClases);
+        db.execSQL(q.createEventos);
         db.execSQL(q.createCalendario);
+        db.execSQL(q.createLog);
+
 
         //Inicializacion de tablas.
         runSQlFromArray(q.initRoles,db);
         runSQlFromArray(q.initPlanes,db);
-        runSQlFromArray(q.initTipos,db);
         runSQlFromArray(q.initUsuarios,db);
         runSQlFromArray(q.initTrainings,db);
+        runSQlFromArray(q.initAfiliaciones,db);
 
     }
 
@@ -122,8 +122,7 @@ public class DAO extends SQLiteOpenHelper {
                 +user.getPassword()+"','"
                 +user.getGenero()+"','"
                 +user.getEmail()+"','"
-                +user.getPathFoto()+"',"
-                +"'55555',1,1)";
+                +user.getPathFoto()+"')";
         try {
             System.out.println("Registrando usuario: "+sql);
             db.execSQL(sql);

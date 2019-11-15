@@ -1,6 +1,7 @@
 package com.example.proyectoadbj;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -10,11 +11,15 @@ public class fragmentPagerAdapter extends FragmentPagerAdapter {
     private int numTabs;
     private String activeUserName;
 
+    private String tabTitles[] = new String[] { "YO", "EVENTOS", "MI CALENDARIO","TRAINERS","EQUIPOS" };
+
 
     public fragmentPagerAdapter(FragmentManager fm, int numTabs,String activeUserName) {
         super(fm);
         this.numTabs=numTabs;
         this.activeUserName=activeUserName;
+
+
     }
 
     @Override
@@ -48,5 +53,11 @@ public class fragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return tabTitles[position];
     }
 }

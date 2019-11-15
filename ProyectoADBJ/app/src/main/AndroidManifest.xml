@@ -11,11 +11,7 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".Dashboard"></activity>
         <activity android:name=".menuPago" />
-        <activity android:name=".menuDatosUsuario" />
         <activity android:name=".menuRegistro" />
-        <activity android:name=".menuPlanes" />
-        <activity android:name=".menuInfo" />
-        <activity android:name=".menuPrincipal" />
         <activity android:name=".MainActivity">
 
 

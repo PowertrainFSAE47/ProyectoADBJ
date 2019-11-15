@@ -74,14 +74,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tabStats"
-            android:text="Estadística"
+            android:text="Mis Clases"
             android:textSize="10dp"/>
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tabClases"
-            android:text="Clases"
+            android:text="Mi Agenda"
             android:textSize="10dp"/>
 
         <com.google.android.material.tabs.TabItem
