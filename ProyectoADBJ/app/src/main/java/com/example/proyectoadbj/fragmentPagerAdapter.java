@@ -32,13 +32,13 @@ public class fragmentPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return fragmentUser.crearFragmentUser(activeUserName);
             case 1:
-                return new tabStats();
+                return fragmentEventos.crearFragmentEventos(activeUserName);
             case 2:
-                return new tabClases();
+                return new tabStats();
             case 3:
-                return new tabTrainers();
-            case 4:
                 return new tabMaquinas();
+            case 4:
+                return new tabTrainers();
             default:
                 return null;
         }

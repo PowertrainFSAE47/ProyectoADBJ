@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tabStats">
+    tools:context=".fragmentEventos">
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
@@ -25,6 +25,7 @@
             android:orientation="horizontal">
 
             <Spinner
+                android:id="@+id/spTrainings"
                 android:layout_width="360dp"
                 android:layout_height="50dp"
                 android:entries="@array/clases"
@@ -38,7 +39,7 @@
             android:orientation="horizontal">
 
             <CalendarView
-                android:id="@+id/calendarView"
+                android:id="@+id/calendarioEventos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -52,18 +53,16 @@
             android:layout_marginRight="25dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hora Entrada:"
-                android:textSize="20dp"/>
-
             <Spinner
-                android:layout_width="360dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:entries="@array/clases"
-                />
+                android:spinnerMode="dialog"
+                android:id="@+id/spEventos"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:scrollHorizontally="false"
+                android:layout_weight="1"
+                android:ellipsize="none"
+                android:maxLines="100"
+                android:entries="@array/clases" />
         </LinearLayout>
 
             <LinearLayout
@@ -71,35 +70,14 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hora Salida:"
-                    android:textSize="20dp"/>
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Trainer:"
-                    android:textSize="20dp"/>
-
-                <Spinner
-                    android:layout_width="360dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="20dp"
-                    android:entries="@array/clases"
-                    />
-            </LinearLayout>
+                android:orientation="horizontal"/>
 
             <Button
                 android:layout_width="200dp"

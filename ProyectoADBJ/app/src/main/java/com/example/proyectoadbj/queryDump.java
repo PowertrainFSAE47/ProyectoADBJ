@@ -14,7 +14,7 @@ public class queryDump {
     public String createPlanes = "CREATE TABLE 'planes' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'precio_anual' INTEGER NOT NULL, 'descripcion' TEXT )";
     public String createAfiliaciones="CREATE TABLE 'afiliaciones' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'id_usuario' INTEGER NOT NULL, 'id_rol' INTEGER NOT NULL, 'id_plan' INTEGER NOT NULL, 'desde' TEXT NOT NULL, 'hasta' TEXT NOT NULL, FOREIGN KEY('id_usuario') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_plan') REFERENCES 'planes'('id'), FOREIGN KEY('id_rol') REFERENCES 'roles'('id') )";
     public String createTrainings = "CREATE TABLE 'trainings' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'path_foto' TEXT NOT NULL )";
-    public String createEventos="CREATE TABLE 'eventos' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fecha' TEXT NOT NULL, 'hora_inicio' TEXT NOT NULL, 'hora_fin' TEXT NOT NULL, 'max_personas' INTEGER NOT NULL DEFAULT 1, 'id_training' INTEGER NOT NULL, 'id_instructor' INTEGER NOT NULL, FOREIGN KEY('id_instructor') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_training') REFERENCES 'trainings'('id') )";
+    public String createEventos="CREATE TABLE 'eventos' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fecha' TEXT NOT NULL, 'hora_inicio' TEXT NOT NULL, 'hora_fin' TEXT NOT NULL, 'max_personas' INTEGER NOT NULL, 'id_training' INTEGER NOT NULL, 'id_instructor' INTEGER NOT NULL, FOREIGN KEY('id_instructor') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_training') REFERENCES 'trainings'('id') )";
     public String createCalendario = "CREATE TABLE 'calendario' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'id_evento' INTEGER NOT NULL, 'id_usuario' INTEGER NOT NULL, FOREIGN KEY('id_evento') REFERENCES 'eventos'('id'), FOREIGN KEY('id_usuario') REFERENCES 'usuarios'('id') )";
 
     public String createLog="CREATE TABLE 'log' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'descripcion' TEXT NOT NULL, 'fecha' TEXT NOT NULL )";
@@ -54,17 +54,21 @@ public class queryDump {
             "insert into trainings values (null, 'Spinning','tr2')",
             "insert into trainings values (null, 'Yoga','tr3')",
             "insert into trainings values (null, 'Zumba','tr4')",
-            "insert into trainings values (null, 'Aerobics','tr5')"
+            "insert into trainings values (null, 'Aerobics','tr5')",
+            "insert into trainings values (null, 'Calistenia','tr6')"
     };
 
     public String[] dropTables= {
+
             "DROP TABLE IF EXISTS CALENDARIO",
             "DROP TABLE IF EXISTS EVENTOS",
             "DROP TABLE IF EXISTS AFILIACIONES",
             "DROP TABLE IF EXISTS USUARIOS",
             "DROP TABLE IF EXISTS ROLES",
             "DROP TABLE IF EXTISTS PLANES",
-            "DROP TABLE IF EXTISTS LOG"
+            "DROP TABLE IF EXTISTS LOG",
+            "DROP TABLE IF EXTISTS TRAININGS",
+            "DROP DATABASE IF EXISTS gymDB"
     };
 
     public String[] initAfiliaciones = {
@@ -75,4 +79,25 @@ public class queryDump {
             "insert into afiliaciones values (null, 4,1,5,'15-10-2019','15-10-2020')",
             "insert into afiliaciones values (null, 5,3,1,'15-10-2019','15-10-2020')",
     };
+
+    public String[] initEventos = {
+
+            //                          id,fecha,hora_inicio,hora_fin,id_training,id_instructor
+            "insert into eventos values (null, '16/10/2019','14:00','15:00',2,1,1)",
+            "insert into eventos values (null, '16/10/2019','16:00','18:00',5,2,3)",
+            "insert into eventos values (null, '17/10/2019','19:00','21:00',22,3,5)",
+            "insert into eventos values (null, '17/10/2019','14:00','15:00',12,4,2)",
+            "insert into eventos values (null, '5/1/2020','14:00','15:00',10,5,4)",
+
+    };
+
+
+
+    public String getTrainings="select nombre from trainings";
+
+    public String getEventosDisponibles(String fecha){
+        return "select trainings.nombre,hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos " +
+                "from eventos,usuarios,trainings " +
+                "where eventos.id_training=trainings.id and eventos.id_instructor=usuarios.id and eventos.fecha='"+fecha+"'";
+    }
 }

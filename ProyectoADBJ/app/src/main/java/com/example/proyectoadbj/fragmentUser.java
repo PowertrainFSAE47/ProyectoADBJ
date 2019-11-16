@@ -1,10 +1,6 @@
 package com.example.proyectoadbj;
 
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -16,10 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.InputStream;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +19,6 @@ import java.io.InputStream;
 public class fragmentUser extends Fragment {
 
     // Parametros
-    private Usuario user;
     private String activeUserName;
 
 

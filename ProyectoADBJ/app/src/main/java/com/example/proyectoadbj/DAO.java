@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 public class DAO extends SQLiteOpenHelper {
 
@@ -15,7 +18,7 @@ public class DAO extends SQLiteOpenHelper {
 
 
     public DAO(Context context) {
-        super(context, nomDB, null,1);
+        super(context, nomDB, null,2);
     }
 
     @Override
@@ -39,9 +42,9 @@ public class DAO extends SQLiteOpenHelper {
         runSQlFromArray(q.initUsuarios,db);
         runSQlFromArray(q.initTrainings,db);
         runSQlFromArray(q.initAfiliaciones,db);
+        runSQlFromArray(q.initEventos,db);
 
     }
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -55,6 +58,7 @@ public class DAO extends SQLiteOpenHelper {
 
         // Esto arranca todas las queries en el array suministrado.
         for (int i = 0; i < arr.length ; i++) {
+            System.out.println(arr[i]);
             db.execSQL(arr[i]);
         }
     }
@@ -103,7 +107,9 @@ public class DAO extends SQLiteOpenHelper {
         Cursor datos=db.rawQuery(sql,null);
 
         if (datos.moveToNext()) {
-            return datos.getString(0);
+            String plan=datos.getString(0);
+            //datos.close();
+            return plan;
         }else{
             return "NO AFILIADO";
         }
@@ -128,5 +134,43 @@ public class DAO extends SQLiteOpenHelper {
         }catch(Exception e){
             return false;
         }
+    }
+
+
+    public ArrayList<String> getColumn(String sql){
+
+        ArrayList<String> column=new ArrayList<>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor datos=db.rawQuery(sql,null);
+
+        while (datos.moveToNext()) {
+
+            String elemento=datos.getString(0);
+            System.out.println("getColumn iteration: "+datos.getString(0));
+            column.add(elemento);
+        }
+        //datos.close();
+        return column;
+    }
+
+    public ArrayList<String> getConcatRows(String sql,String[] sep){
+
+        ArrayList<String> rows=new ArrayList<>();
+        String row;
+
+        // Conectar a DB
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor datos=db.rawQuery(sql,null);
+
+        System.out.println("Encontrados "+datos.getCount()+" registros");
+        while (datos.moveToNext()) {
+            row="";
+            for (int i = 0; i < datos.getColumnCount(); i++) {
+                row=row+datos.getString(i)+sep[i];
+            }
+            System.out.println(row);
+            rows.add(row);
+        }
+        return rows;
     }
 }

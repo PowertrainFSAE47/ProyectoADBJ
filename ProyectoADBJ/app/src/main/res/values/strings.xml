@@ -34,11 +34,7 @@
 
 
     <string-array name="clases">
-        <item>Yoga</item>
-        <item>Cardio</item>
-        <item>Crossfit</item>
-        <item>Boxeo</item>
-        <item>Lucha Libre</item>
+        <item>No existen eventos</item>
     </string-array>
 
 
