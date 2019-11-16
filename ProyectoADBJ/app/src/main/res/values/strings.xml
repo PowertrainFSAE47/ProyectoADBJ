@@ -33,6 +33,14 @@
     <string name="telefono">+569 7553 6814</string>
 
 
+    <string-array name="clases">
+        <item>Yoga</item>
+        <item>Cardio</item>
+        <item>Crossfit</item>
+        <item>Boxeo</item>
+        <item>Lucha Libre</item>
+    </string-array>
+
 
 
 

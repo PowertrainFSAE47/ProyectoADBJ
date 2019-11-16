@@ -16,10 +16,99 @@
             android:background="@drawable/dashboard_background_blue"
             android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:orientation="horizontal">
 
-            <androidx.cardview.widget.CardView
+            <Spinner
+                android:layout_width="360dp"
+                android:layout_height="50dp"
+                android:entries="@array/clases"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="25dp"
+            android:orientation="horizontal">
+
+            <CalendarView
+                android:id="@+id/calendarView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/calendario" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora Entrada:"
+                android:textSize="20dp"/>
+
+            <Spinner
+                android:layout_width="360dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:entries="@array/clases"
+                />
+        </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hora Salida:"
+                    android:textSize="20dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trainer:"
+                    android:textSize="20dp"/>
+
+                <Spinner
+                    android:layout_width="360dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:entries="@array/clases"
+                    />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Unirme"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/edit_round_border"/>
+
         </LinearLayout>
 
     </ScrollView>
