@@ -89,8 +89,7 @@ public class DAO extends SQLiteOpenHelper {
             user.setUsername(datos.getString(3));
             user.setPassword(datos.getString(4));
             user.setGenero(datos.getString(5));
-            user.setEmail(datos.getString(6));
-            user.setPathFoto(datos.getString(7));
+            user.setPathFoto(datos.getString(6));
         }
 
         return user;
@@ -100,7 +99,7 @@ public class DAO extends SQLiteOpenHelper {
     public String getPlan(String username)
     {
         SQLiteDatabase db=this.getReadableDatabase();
-        String sql="select planes.nombre from planes,usuarios where planes.id=usuarios.id_plan and usuarios.username='"+username+"'";
+        String sql="select planes.nombre from planes,usuarios,afiliaciones where planes.id=afiliaciones.id_plan and usuarios.id=afiliaciones.id_usuario and usuarios.username='"+username+"'";
         Cursor datos=db.rawQuery(sql,null);
 
         if (datos.moveToNext()) {
@@ -121,7 +120,6 @@ public class DAO extends SQLiteOpenHelper {
                 +user.getUsername()+"','"
                 +user.getPassword()+"','"
                 +user.getGenero()+"','"
-                +user.getEmail()+"','"
                 +user.getPathFoto()+"')";
         try {
             System.out.println("Registrando usuario: "+sql);

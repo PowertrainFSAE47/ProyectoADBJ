@@ -2,8 +2,6 @@ package com.example.proyectoadbj;
 
 public class queryDump {
 
-
-
     public queryDump() {
     }
 
@@ -11,15 +9,15 @@ public class queryDump {
     public String nomDB="gymDB";
     // Queries de creacion de roles.
 
-    public String createUsuarios = "CREATE TABLE 'usuarios' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'apellidos' TEXT NOT NULL, 'username' TEXT NOT NULL, 'password' TEXT NOT NULL, 'genero' TEXT NOT NULL, 'email' TEXT NOT NULL, 'path_foto' TEXT NOT NULL)";
+    public String createUsuarios = "CREATE TABLE 'usuarios' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'apellidos' TEXT NOT NULL, 'username' TEXT NOT NULL, 'password' TEXT NOT NULL, 'genero' TEXT NOT NULL, 'path_foto' TEXT NOT NULL)";
     public String createRoles = "CREATE TABLE 'roles' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL )";
     public String createPlanes = "CREATE TABLE 'planes' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'precio_anual' INTEGER NOT NULL, 'descripcion' TEXT )";
     public String createAfiliaciones="CREATE TABLE 'afiliaciones' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'id_usuario' INTEGER NOT NULL, 'id_rol' INTEGER NOT NULL, 'id_plan' INTEGER NOT NULL, 'desde' TEXT NOT NULL, 'hasta' TEXT NOT NULL, FOREIGN KEY('id_usuario') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_plan') REFERENCES 'planes'('id'), FOREIGN KEY('id_rol') REFERENCES 'roles'('id') )";
     public String createTrainings = "CREATE TABLE 'trainings' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'path_foto' TEXT NOT NULL )";
     public String createEventos="CREATE TABLE 'eventos' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fecha' TEXT NOT NULL, 'hora_inicio' TEXT NOT NULL, 'hora_fin' TEXT NOT NULL, 'max_personas' INTEGER NOT NULL DEFAULT 1, 'id_training' INTEGER NOT NULL, 'id_instructor' INTEGER NOT NULL, FOREIGN KEY('id_instructor') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_training') REFERENCES 'trainings'('id') )";
-    public String createCalendario = "CREATE TABLE 'eventos' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fecha' TEXT NOT NULL, 'hora_inicio' TEXT NOT NULL, 'hora_fin' TEXT NOT NULL, 'max_personas' INTEGER NOT NULL DEFAULT 1, 'id_training' INTEGER NOT NULL, 'id_instructor' INTEGER NOT NULL, FOREIGN KEY('id_instructor') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_training') REFERENCES 'trainings'('id') )";
+    public String createCalendario = "CREATE TABLE 'calendario' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'id_evento' INTEGER NOT NULL, 'id_usuario' INTEGER NOT NULL, FOREIGN KEY('id_evento') REFERENCES 'eventos'('id'), FOREIGN KEY('id_usuario') REFERENCES 'usuarios'('id') )";
 
-    public String createLog="";
+    public String createLog="CREATE TABLE 'log' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'descripcion' TEXT NOT NULL, 'fecha' TEXT NOT NULL )";
     // Queries de inicializacion de tablas
 
     // Tabla roles
@@ -43,24 +41,30 @@ public class queryDump {
 
     public String[] initUsuarios={
 
-            "insert into usuarios values (null,'Arnold', 'Schwarzenegger','terminator2',123,'hombre','awhnold@califohnia.gov','img1','555-555-555')",
-            "insert into usuarios values (null,'Sylvester', 'Stallone','italianstallion',456,'hombre','sly@rambo.com','img2','555-555-555')",
-            "insert into usuarios values (null,'Gordon', 'Freeman','halflifer',123,'hombre','gordon.freeman@blackmesa.gov','img3','555-555-555')",
-            "insert into usuarios values (null,'Jason', 'Statham','transporter86',123,'hombre','baldguy@hitman.com','img4','555-555-555')",
-            "insert into usuarios values (null,'Adrian','Nario','elbananero',123,'hombre','lanegranoshace2x1@bananero.net','img5','555-555-555');"
+            "insert into usuarios values (null,'Arnold', 'Schwarzenegger','terminator2',123,'hombre','img1')",
+            "insert into usuarios values (null,'Sylvester', 'Stallone','italianstallion',456,'hombre','img2')",
+            "insert into usuarios values (null,'Gordon', 'Freeman','halflifer',123,'hombre','img3')",
+            "insert into usuarios values (null,'Jason', 'Statham','transporter86',123,'hombre','img4')",
+            "insert into usuarios values (null,'Adrian','Nario','elbananero',123,'hombre','img5');"
     };
 
     public String[] initTrainings= {
 
-            "insert into trainings values (null, 'Pesas',1,'tr1')",
-            "insert into trainings values (null, 'Spinning',2,'tr2')",
-            "insert into trainings values (null, 'Yoga',2,'tr3')",
-            "insert into trainings values (null, 'Zumba',2,'tr4')",
-            "insert into trainings values (null, 'Aerobics',2,'tr5')"
+            "insert into trainings values (null, 'Pesas','tr1')",
+            "insert into trainings values (null, 'Spinning','tr2')",
+            "insert into trainings values (null, 'Yoga','tr3')",
+            "insert into trainings values (null, 'Zumba','tr4')",
+            "insert into trainings values (null, 'Aerobics','tr5')"
     };
 
     public String[] dropTables= {
+            "DROP TABLE IF EXISTS CALENDARIO",
+            "DROP TABLE IF EXISTS EVENTOS",
+            "DROP TABLE IF EXISTS AFILIACIONES",
             "DROP TABLE IF EXISTS USUARIOS",
+            "DROP TABLE IF EXISTS ROLES",
+            "DROP TABLE IF EXTISTS PLANES",
+            "DROP TABLE IF EXTISTS LOG"
     };
 
     public String[] initAfiliaciones = {
@@ -71,5 +75,4 @@ public class queryDump {
             "insert into afiliaciones values (null, 4,1,5,'15-10-2019','15-10-2020')",
             "insert into afiliaciones values (null, 5,3,1,'15-10-2019','15-10-2020')",
     };
-
 }
