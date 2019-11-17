@@ -8,52 +8,31 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <CalendarView
+            android:padding="10dp"
+            android:id="@+id/calendarioEventos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/dashboard_background_blue"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="@drawable/calendario"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="25dp"
-                android:orientation="horizontal">
+        <Spinner
+            android:id="@+id/spTrainings"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:entries="@array/clases" />
 
-                <Spinner
-                    android:id="@+id/spTrainings"
-                    android:layout_width="360dp"
-                    android:layout_height="50dp"
-                    android:entries="@array/clases" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:orientation="vertical">
+        <ListView
+            android:id="@+id/lvEventos"
 
-                <CalendarView
-                    android:id="@+id/calendarioEventos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/calendario" />
-
-                <ListView
-                    android:id="@+id/lvEventos"
-
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:entries="@array/clases"
-                    android:scrollbarSize="8dp" />
-            </LinearLayout>
-
-        </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:entries="@array/clases"
+            android:scrollbarSize="8dp" />
 
     </LinearLayout>
 

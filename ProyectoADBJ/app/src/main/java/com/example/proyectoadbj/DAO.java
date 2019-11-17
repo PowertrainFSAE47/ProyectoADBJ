@@ -18,7 +18,7 @@ public class DAO extends SQLiteOpenHelper {
 
 
     public DAO(Context context) {
-        super(context, nomDB, null,2);
+        super(context, nomDB, null,3);
     }
 
     @Override
@@ -167,7 +167,7 @@ public class DAO extends SQLiteOpenHelper {
         while (datos.moveToNext()) {
             row="";
             for (int i = 0; i < datos.getColumnCount(); i++) {
-                row=row+datos.getString(i)+sep[i];
+                row=row+sep[i]+datos.getString(i);
             }
             System.out.println(row);
             rows.add(row);
