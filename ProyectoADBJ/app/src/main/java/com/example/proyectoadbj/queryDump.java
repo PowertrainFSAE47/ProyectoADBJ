@@ -65,10 +65,9 @@ public class queryDump {
             "DROP TABLE IF EXISTS AFILIACIONES",
             "DROP TABLE IF EXISTS USUARIOS",
             "DROP TABLE IF EXISTS ROLES",
-            "DROP TABLE IF EXTISTS PLANES",
-            "DROP TABLE IF EXTISTS LOG",
-            "DROP TABLE IF EXTISTS TRAININGS",
-            "DROP DATABASE IF EXISTS gymDB"
+            "DROP TABLE IF EXISTS PLANES",
+            "DROP TABLE IF EXISTS LOG",
+            "DROP TABLE IF EXISTS TRAININGS",
     };
 
     public String[] initAfiliaciones = {
@@ -85,8 +84,11 @@ public class queryDump {
             //                          id,fecha,hora_inicio,hora_fin,id_training,id_instructor
             "insert into eventos values (null, '16/10/2019','14:00','15:00',2,1,1)",
             "insert into eventos values (null, '16/10/2019','16:00','18:00',5,2,3)",
-            "insert into eventos values (null, '17/10/2019','19:00','21:00',22,3,5)",
-            "insert into eventos values (null, '17/10/2019','14:00','15:00',12,4,2)",
+            "insert into eventos values (null, '16/10/2019','19:00','21:00',22,3,5)",
+            "insert into eventos values (null, '16/10/2019','14:00','15:00',12,3,2)",
+            "insert into eventos values (null, '16/10/2019','16:00','18:00',5,1,3)",
+            "insert into eventos values (null, '16/10/2019','19:00','21:00',22,2,5)",
+            "insert into eventos values (null, '16/10/2019','14:00','15:00',12,3,2)",
             "insert into eventos values (null, '5/1/2020','14:00','15:00',10,5,4)",
 
     };

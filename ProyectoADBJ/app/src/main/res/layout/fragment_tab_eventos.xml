@@ -6,9 +6,10 @@
     tools:context=".fragmentEventos">
 
     <!-- TODO: Update blank fragment layout -->
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,79 +17,44 @@
             android:background="@drawable/dashboard_background_blue"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:id="@+id/spTrainings"
-                android:layout_width="360dp"
-                android:layout_height="50dp"
-                android:entries="@array/clases"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="25dp"
-            android:orientation="horizontal">
-
-            <CalendarView
-                android:id="@+id/calendarioEventos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/calendario" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:orientation="horizontal">
-
-            <Spinner
-                android:spinnerMode="dialog"
-                android:id="@+id/spEventos"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:scrollHorizontally="false"
-                android:layout_weight="1"
-                android:ellipsize="none"
-                android:maxLines="100"
-                android:entries="@array/clases" />
-        </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginRight="25dp"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spTrainings"
+                    android:layout_width="360dp"
+                    android:layout_height="50dp"
+                    android:entries="@array/clases" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
-                android:orientation="horizontal"/>
-
-            <Button
-                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Unirme"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/edit_round_border"/>
+                android:layout_margin="25dp"
+                android:orientation="vertical">
+
+                <CalendarView
+                    android:id="@+id/calendarioEventos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/calendario" />
+
+                <ListView
+                    android:id="@+id/lvEventos"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:entries="@array/clases"
+                    android:scrollbarSize="8dp" />
+            </LinearLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
 </FrameLayout>

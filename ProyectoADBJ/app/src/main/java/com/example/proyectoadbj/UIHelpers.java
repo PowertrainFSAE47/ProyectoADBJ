@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -30,6 +31,12 @@ public class UIHelpers {
 
         ArrayAdapter<String> adapter = new ArrayAdapter <> (context, android.R.layout.simple_dropdown_item_1line,lista);
         spinner.setAdapter(adapter);
+    }
+
+    public static void fillListView(ListView listview, ArrayList<String> lista, Context context){
+
+        ArrayAdapter<String> adapter = new ArrayAdapter <> (context, android.R.layout.simple_dropdown_item_1line,lista);
+        listview.setAdapter(adapter);
     }
 
 }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class fragmentEventos extends Fragment {
     // Controles y views
     CalendarView calendarioEventos;
     Spinner spTrainings;
-    Spinner spEventos;
+    ListView lvEventos;
 
 
     // Data access object y querydump
@@ -80,7 +81,7 @@ public class fragmentEventos extends Fragment {
         //Obtener views y controles
         spTrainings=view.findViewById(R.id.spTrainings);
         calendarioEventos=view.findViewById(R.id.calendarioEventos);
-        spEventos=view.findViewById(R.id.spEventos);
+        lvEventos=view.findViewById(R.id.lvEventos);
 
         // Conexion a BD.
         dao = new DAO(container.getContext());
@@ -98,8 +99,8 @@ public class fragmentEventos extends Fragment {
                 String sql = q.getEventosDisponibles(dayOfMonth + "/" + month + "/" + year);
                 System.out.println("Consultando eventos para: "+dayOfMonth + "/" + month + "/" + year);
                 System.out.println(sql);
-                ArrayList<String> eventos = dao.getConcatRows(sql, new String[]{ " desde: ", " hasta: "," con: "," ",""});
-                UIHelpers.fillSpinner(spEventos, eventos, container.getContext());
+                ArrayList<String> eventos = dao.getConcatRows(sql, new String[]{ " ", "->"," con: "," ",""});
+                UIHelpers.fillListView(lvEventos, eventos, container.getContext());
             }
         });
 

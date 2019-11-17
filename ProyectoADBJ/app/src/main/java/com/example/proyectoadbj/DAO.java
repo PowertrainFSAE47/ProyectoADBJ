@@ -26,6 +26,7 @@ public class DAO extends SQLiteOpenHelper {
 
         // Creacion de todas las tablas
 
+
         db.execSQL(q.createUsuarios);
         db.execSQL(q.createRoles);
         db.execSQL(q.createPlanes);
