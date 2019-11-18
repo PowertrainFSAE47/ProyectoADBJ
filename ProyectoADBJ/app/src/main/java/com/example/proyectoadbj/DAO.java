@@ -151,11 +151,11 @@ public class DAO extends SQLiteOpenHelper {
         return column;
     }
 
-    public ArrayList<workoutEvent> getWorkoutEventList(String fecha, String filtro) {
+    public ArrayList<workoutEvent> getWorkoutEventList(String fecha, String tipoWorkout) {
 
         // Retorna un arraylist con todos los workoutEvent que satisfagan fecha y filtro.
         String sql = "";
-        if (filtro.compareTo("Todas")==0) {
+        if (tipoWorkout.compareTo("Todas") == 0) {
             // Mostrar todos los eventos de ejercicio sin filtrar
             sql = "select eventos.id,hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos,trainings.nombre " +
                     "from eventos,usuarios,trainings " +
@@ -170,7 +170,7 @@ public class DAO extends SQLiteOpenHelper {
                     "where eventos.id_training=trainings.id " +
                     "and eventos.id_instructor=usuarios.id " +
                     "and eventos.fecha='" + fecha + "'" +
-                    "and trainings.nombre='" + filtro + "'";
+                    "and trainings.nombre='" + tipoWorkout + "'";
         }
         ArrayList<workoutEvent> workouts = new ArrayList<>();
 
@@ -180,13 +180,13 @@ public class DAO extends SQLiteOpenHelper {
 
         while (datos.moveToNext()) {
 
-            workoutEvent w=new workoutEvent();
+            workoutEvent w = new workoutEvent();
             w.setId(datos.getInt(0));
             w.setHoraInicio(datos.getString(1));
             w.setHoraFin(datos.getString(2));
-            w.setEntrenador(datos.getString(3)+" "+datos.getString(4));
+            w.setEntrenador(datos.getString(3) + " " + datos.getString(4));
             w.setTraining(datos.getString(5));
-            System.out.println("w.setTraining: "+datos.getString(5));
+            System.out.println("w.setTraining: " + datos.getString(5));
             workouts.add(w);
         }
         return workouts;
@@ -201,12 +201,12 @@ public class DAO extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         // Contamos la cantidad de personas
-        String sql=q.checkUserOnCalendarEntry(workoutevent.getId(),activeUsername);
+        String sql = q.checkUserOnCalendarEntry(workoutevent.getId(), activeUsername);
 
         Cursor datos = db.rawQuery(sql, null);
 
-        if (datos.moveToNext()){
-            if (datos.getInt(0)==1){
+        if (datos.moveToNext()) {
+            if (datos.getInt(0) == 1) {
                 // El usuario ya está registrado en este workout
                 return true;
             }
@@ -215,22 +215,57 @@ public class DAO extends SQLiteOpenHelper {
         return false;
     }
 
-    public boolean scheduleUserForCalendarEntry(String fullDate, workoutEvent workoutEvent, String activeUserName) {
+    public int joinEvent(workoutEvent workoutevent, String username) {
 
-        // Registrar al usuario activeUsername en el workoutEvent a la fecha fullDate
-
-        // Conectar a DB y ejecutar consulta.
+        // Si el usuario ya está registrado, retorna -1. Si se registra, retorna 1, si hay algún error, retorna 0
+        // Conectar a DB.
         SQLiteDatabase db = this.getReadableDatabase();
 
+        //Obtener id del usuario y del evento
+        int idUsuario = getIdFromUsuario(username);
+        int idEvento = workoutevent.getId();
+
+        // Verificar si el usuario ya está registrado para este evento
+        String sql = q.checkUserOnCalendarEntry(idEvento, username);
+        Cursor datos = db.rawQuery(sql, null);
+
+        if (datos.moveToNext()) {
+            if (datos.getInt(0) == 1) {
+                // El usuario ya está registrado en este workout
+                return -1;
+            } else {
+                // Usuario no está registrado, registramos
+                try {
+                    db.execSQL(q.insertCalendario(idEvento, idUsuario));
+                    // Usuario registrado exitosamente en el calendario para un evento particular
+                    return 1;
+                } catch (Exception e) {
+                    // Error al registrar usuario.
+                    return 0;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public int getIdFromUsuario(String activeUserName) {
+
+        // Obtener database
+        SQLiteDatabase db = this.getReadableDatabase();
         //Obtener id del usuario
         Cursor datos = db.rawQuery(q.getUsernameId(activeUserName), null);
 
-        if (datos.moveToNext()){
-            int activeUserId=datos.getInt(0);
-            // Registrar usuario en el calendario para workoutEvent::id
-            db.execSQL(q.insertCalendario(workoutEvent.getId(),activeUserId));
-            return true;
+        if (datos.moveToNext()) {
+            return datos.getInt(0);
+        } else {
+            return -1;
         }
-        return false;
+
     }
+
+    public void getCalendarEvents(){
+
+    }
+
+
 }

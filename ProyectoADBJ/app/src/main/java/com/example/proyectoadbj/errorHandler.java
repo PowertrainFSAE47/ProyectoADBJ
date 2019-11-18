@@ -58,6 +58,10 @@ public class errorHandler {
             case usuarioRegistradoEnCalendario:
                 myToast.makeText(context, "Te registraste exitosamente en esta actividad!", Toast.LENGTH_SHORT).show();
                 break;
+            case ustedYaEstaRegistrado:
+                myToast.makeText(context, "Esta actividad ya se encuentra en su calendario!", Toast.LENGTH_SHORT).show();
+                break;
+
             default:
                 Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show();
         }

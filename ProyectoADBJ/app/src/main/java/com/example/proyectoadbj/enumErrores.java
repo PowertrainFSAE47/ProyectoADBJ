@@ -14,4 +14,5 @@ public enum enumErrores {
     sinUserName,
     usuarioYaExiste,
     usuarioRegistradoEnCalendario,
+    ustedYaEstaRegistrado,
 }

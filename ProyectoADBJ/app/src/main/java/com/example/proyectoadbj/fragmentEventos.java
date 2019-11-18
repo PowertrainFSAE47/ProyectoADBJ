@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class fragmentEventos extends Fragment {
 
 
+    
     // Controles y views
     CalendarView calendarioEventos;
     Spinner spTrainings;
@@ -123,19 +124,20 @@ public class fragmentEventos extends Fragment {
                 al usuario que va a registrarse en un evento.
                 Crear una entrada al calendario*/
 
-                boolean userOnCalendarEntry=dao.checkIfUserOnCalendarEntry(fullDate,workoutEventList.get(position),activeUserName);
+                //Poner evento en el calendario
+                int estado=dao.joinEvent(workoutEventList.get(position),activeUserName);
 
-                if (userOnCalendarEntry){
-
-                }else{
-                    // Registrar al usuario en el calendar entry
-                    boolean usuarioRegistrado=dao.scheduleUserForCalendarEntry(fullDate,workoutEventList.get(position),activeUserName);
-                    if (usuarioRegistrado){
-                        errorHandler.Toaster(enumErrores.usuarioRegistradoEnCalendario,view.getContext());
-                    }else{
-                        errorHandler.Toaster(enumErrores.errorDeRegistro,view.getContext());
-                    }
+                if (estado==1){
+                    errorHandler.Toaster(enumErrores.usuarioRegistradoEnCalendario,view.getContext());
                 }
+                if(estado==0){
+                    errorHandler.Toaster(enumErrores.errorDeRegistro,view.getContext());
+                }
+                
+                if(estado==-1){
+                    errorHandler.Toaster(enumErrores.ustedYaEstaRegistrado,view.getContext());
+                }
+                
                 return true;
             }
         });

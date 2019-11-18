@@ -16,8 +16,6 @@ import com.google.android.material.tabs.TabLayout;
 public class Dashboard extends AppCompatActivity {
 
     // Con asistencia de https://guides.codepath.com/android/Google-Play-Style-Tabs-using-TabLayout
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

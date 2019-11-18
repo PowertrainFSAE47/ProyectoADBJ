@@ -128,4 +128,8 @@ public class queryDump {
         return "insert into calendario values (null,"+eventId+","+activeUserId+")";
     }
 
+    public String getCalendarEntries(int idUsuario){
+        return "select id_eventos from calendario where id_usuario='"+idUsuario+"'";
+    }
+
 }

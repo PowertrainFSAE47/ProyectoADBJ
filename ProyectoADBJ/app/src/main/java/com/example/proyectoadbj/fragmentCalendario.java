@@ -75,18 +75,18 @@ public class fragmentCalendario extends Fragment {
         //Views y controles
         ListView lvCalendario=view.findViewById(R.id.lvCalendario);
 
-        // Conexion a BD.
+        // Conexion a BD y obtencion de username activo.
         dao = new DAO(container.getContext());
-        Usuario user = dao.retrieveUser(activeUserName);
 
+        // Obtener id del usuario
+        Usuario usuario = dao.retrieveUser(activeUserName);
+        int idUsuario=dao.getIdFromUsuario(activeUserName);
 
-        // Llenar el lvCalendario con todos los eventos del calendario de este usuario
-        UIHelpers.fillListView(lvEventos, workoutStringList, this.getContext());
-
+        llenarCalendario(idUsuario);
 
     }
 
-    private void llenarlvCalendario() {
+    private void llenarCalendario(int idUsuario) {
 
         // llenar ListView lvEventos.
         // Generamos lista de ::workoutEvent .
@@ -94,13 +94,14 @@ public class fragmentCalendario extends Fragment {
         //workoutEventList = dao.getWorkoutEventList(fullDate,spTrainings.getSelectedItem().toString());
 
         ArrayList<String> workoutStringList=new ArrayList<>();
+
         for (workoutEvent workout:workoutEventList) {
             // Agregar contenido a la lista del spinner
             workoutStringList.add(workout.workoutDescription());
         }
 
         // Llenar el listview con los eventos de ejercicio obtenidos.
-        UIHelpers.fillListView(lvEventos, workoutStringList, this.getContext());
+        //UIHelpers.fillListView(lvEventos, workoutStringList, this.getContext());
     }
 
 
