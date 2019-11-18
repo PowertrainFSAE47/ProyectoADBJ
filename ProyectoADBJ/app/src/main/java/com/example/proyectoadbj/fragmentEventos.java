@@ -116,34 +116,30 @@ public class fragmentEventos extends Fragment {
             }
         });
 
-        lvEventos.setOnLongClickListener(new View.OnLongClickListener() {
+        lvEventos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onLongClick(View v) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 /* En un clic largo hay que lanzar un dialogo de alerta que confirma
                 al usuario que va a registrarse en un evento.
                 Crear una entrada al calendario*/
 
-                int i=lvEventos.getSelectedItemPosition();
-                // Registrar al usuario activo en el workout que ha seleccionado
-                boolean userOnCalendarEntry=dao.checkIfUserOnCalendarEntry(fullDate,workoutEventList.get(i),activeUserName);
+                boolean userOnCalendarEntry=dao.checkIfUserOnCalendarEntry(fullDate,workoutEventList.get(position),activeUserName);
 
                 if (userOnCalendarEntry){
 
                 }else{
                     // Registrar al usuario en el calendar entry
-                    boolean usuarioRegistrado=dao.scheduleUserForCalendarEntry(fullDate,workoutEventList.get(i),activeUserName);
+                    boolean usuarioRegistrado=dao.scheduleUserForCalendarEntry(fullDate,workoutEventList.get(position),activeUserName);
                     if (usuarioRegistrado){
-                        errorHandler.Toaster(enumErrores.usuarioRegistradoEnCalendario,container.getContext());
+                        errorHandler.Toaster(enumErrores.usuarioRegistradoEnCalendario,view.getContext());
                     }else{
-                        errorHandler.Toaster(enumErrores.errorDeRegistro,container.getContext());
+                        errorHandler.Toaster(enumErrores.errorDeRegistro,view.getContext());
                     }
-
                 }
-
-
                 return true;
             }
         });
+
     }
 
     public fragmentEventos() {

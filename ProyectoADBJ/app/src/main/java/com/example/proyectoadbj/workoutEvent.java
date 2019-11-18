@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 public class workoutEvent implements Parcelable {
 
-    // Evento de ejercicio al que está suscrito el usuario username
 
     private int id;
     private String horaInicio,horaFin,entrenador,training,fecha;
@@ -14,7 +13,7 @@ public class workoutEvent implements Parcelable {
 
     }
 
-    public workoutEvent(int id, String horaInicio, String horaFin, String entrenador, String training, String username, String fecha) {
+    public workoutEvent(int id, String horaInicio, String horaFin, String entrenador, String training, String fecha) {
         this.id = id;
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
@@ -27,11 +26,12 @@ public class workoutEvent implements Parcelable {
     public String workoutDescription(){
         String separadores[] ={", de ", " a ", " con: "};
 
-        return training+separadores[0]+horaInicio
+        String des=training+separadores[0]+horaInicio
                 +separadores[1]+horaFin
                 +separadores[2]+entrenador;
+        System.out.println("workoutEvent::workoutDescription " + des);
+        return des;
     }
-
 
     public String getHoraInicio() {
         return horaInicio;

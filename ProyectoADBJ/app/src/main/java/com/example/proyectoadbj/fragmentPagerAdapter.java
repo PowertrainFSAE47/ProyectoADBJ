@@ -34,7 +34,7 @@ public class fragmentPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return fragmentEventos.crearFragmentEventos(activeUserName);
             case 2:
-                return fragmentClases.crearFragmentClases(activeUserName);
+                return fragmentCalendario.crearFragmentClases(activeUserName);
             case 3:
                 return new tabMaquinas();
             case 4:

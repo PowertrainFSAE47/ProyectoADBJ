@@ -157,7 +157,7 @@ public class DAO extends SQLiteOpenHelper {
         String sql = "";
         if (filtro.compareTo("Todas")==0) {
             // Mostrar todos los eventos de ejercicio sin filtrar
-            sql = "select eventos.id,hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos,usuarios.username,trainings.nombre " +
+            sql = "select eventos.id,hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos,trainings.nombre " +
                     "from eventos,usuarios,trainings " +
                     "where eventos.id_training=trainings.id " +
                     "and eventos.id_instructor=usuarios.id " +
@@ -165,7 +165,7 @@ public class DAO extends SQLiteOpenHelper {
 
         } else {
             //Mostrar los eventos filtrados por tipo (spinning,yoga,etc)
-            sql = "select eventos.id,hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos,usuarios.username,trainings.nombre " +
+            sql = "select eventos.id,hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos,trainings.nombre " +
                     "from eventos,usuarios,trainings " +
                     "where eventos.id_training=trainings.id " +
                     "and eventos.id_instructor=usuarios.id " +
@@ -186,6 +186,7 @@ public class DAO extends SQLiteOpenHelper {
             w.setHoraFin(datos.getString(2));
             w.setEntrenador(datos.getString(3)+" "+datos.getString(4));
             w.setTraining(datos.getString(5));
+            System.out.println("w.setTraining: "+datos.getString(5));
             workouts.add(w);
         }
         return workouts;
@@ -227,7 +228,7 @@ public class DAO extends SQLiteOpenHelper {
         if (datos.moveToNext()){
             int activeUserId=datos.getInt(0);
             // Registrar usuario en el calendario para workoutEvent::id
-            db.execSQL(q.insertCalendario(workoutEvent.getId(),activeUserId),null);
+            db.execSQL(q.insertCalendario(workoutEvent.getId(),activeUserId));
             return true;
         }
         return false;

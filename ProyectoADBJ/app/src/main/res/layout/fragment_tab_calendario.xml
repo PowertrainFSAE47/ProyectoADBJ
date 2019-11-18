@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmentClases">
+    tools:context=".fragmentCalendario">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -37,7 +37,7 @@
             android:backgroundTint="@color/gymFondo">
 
             <ListView
-                android:id="@+id/lvClases"
+                android:id="@+id/lvCalendario"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
