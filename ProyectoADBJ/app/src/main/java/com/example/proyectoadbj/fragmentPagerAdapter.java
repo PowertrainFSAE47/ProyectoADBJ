@@ -11,7 +11,7 @@ public class fragmentPagerAdapter extends FragmentPagerAdapter {
     private int numTabs;
     private String activeUserName;
 
-    private String tabTitles[] = new String[] { "YO", "EVENTOS", "MI CALENDARIO","TRAINERS","EQUIPOS" };
+    private String tabTitles[] = new String[] { "YO", "EVENTOS", "MI CALENDARIO","EQUIPOS","TRAINERS" };
 
 
     public fragmentPagerAdapter(FragmentManager fm, int numTabs,String activeUserName) {
@@ -34,7 +34,7 @@ public class fragmentPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return fragmentEventos.crearFragmentEventos(activeUserName);
             case 2:
-                return new tabStats();
+                return fragmentClases.crearFragmentClases(activeUserName);
             case 3:
                 return new tabMaquinas();
             case 4:

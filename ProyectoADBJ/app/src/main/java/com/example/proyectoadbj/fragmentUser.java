@@ -36,7 +36,8 @@ public class fragmentUser extends Fragment {
     }
 
 
-    // Al crear un fragmento, se toma el bundle de argumentos
+    // El bundle savedinstancestate sirve para pasar variables de entorno al fragmento en el momento de su creacion
+    // En este caso, se le traspasa el usuario activo.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -29,8 +29,13 @@ public class fragmentEventos extends Fragment {
     Spinner spTrainings;
     ListView lvEventos;
 
-    // fecha activa
-    int selectedDay, selectedMonth, selectedYear;
+
+    // Fields:
+
+    String fullDate;
+    private String activeUserName;
+    ArrayList<workoutEvent> workoutEventList;
+
 
 
     // Data access object y querydump
@@ -38,7 +43,9 @@ public class fragmentEventos extends Fragment {
     queryDump q=new queryDump();
 
 
-    private String activeUserName;
+    // El bundle savedinstancestate sirve para pasar variables de entorno al fragmento en el momento de su creacion
+    // En este caso, se le traspasa el usuario activo.
+
 
     public static fragmentEventos crearFragmentEventos(String activeUserName) {
         fragmentEventos frag = new fragmentEventos();
@@ -90,12 +97,12 @@ public class fragmentEventos extends Fragment {
         spTrainings.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                listarEventos();
+                llenarlvEventos();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                listarEventos();
+                llenarlvEventos();
             }
         });
 
@@ -104,35 +111,61 @@ public class fragmentEventos extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 
-                selectedDay = dayOfMonth;
-                selectedMonth = month;
-                selectedYear = year;
-                listarEventos();
-
-
+                fullDate=dayOfMonth + "/" + month + "/" + year;
+                llenarlvEventos();
             }
         });
 
+        lvEventos.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                /* En un clic largo hay que lanzar un dialogo de alerta que confirma
+                al usuario que va a registrarse en un evento.
+                Crear una entrada al calendario*/
+
+                int i=lvEventos.getSelectedItemPosition();
+                // Registrar al usuario activo en el workout que ha seleccionado
+                boolean userOnCalendarEntry=dao.checkIfUserOnCalendarEntry(fullDate,workoutEventList.get(i),activeUserName);
+
+                if (userOnCalendarEntry){
+
+                }else{
+                    // Registrar al usuario en el calendar entry
+                    boolean usuarioRegistrado=dao.scheduleUserForCalendarEntry(fullDate,workoutEventList.get(i),activeUserName);
+                    if (usuarioRegistrado){
+                        errorHandler.Toaster(enumErrores.usuarioRegistradoEnCalendario,container.getContext());
+                    }else{
+                        errorHandler.Toaster(enumErrores.errorDeRegistro,container.getContext());
+                    }
+
+                }
+
+
+                return true;
+            }
+        });
     }
 
     public fragmentEventos() {
         // Required empty public constructor
     }
 
-    private void listarEventos() {
+    private void llenarlvEventos() {
 
-        // Obtener training seleccionado
-        String trainingSeleccionado = spTrainings.getSelectedItem().toString();
-        // Extraer data del calendario y consultar a la DB
-        String sql="";
-        if (trainingSeleccionado.compareTo("Todas")==0){
-            sql=q.getEventosDisponibles(selectedDay + "/" + selectedMonth + "/" + selectedYear);
-        }else{
-            sql = q.getEventosFiltrados(selectedDay + "/" + selectedMonth + "/" + selectedYear, trainingSeleccionado);
+        // llenar ListView lvEventos.
+        // Generamos lista de ::workoutEvent .
+        // Esta lista puede convertirse en un arraylist de strings si se itera y se transforma usando workoutEvent::workoutDescription()
+        workoutEventList = dao.getWorkoutEventList(fullDate,spTrainings.getSelectedItem().toString());
+
+        ArrayList<String> workoutStringList=new ArrayList<>();
+        for (workoutEvent workout:workoutEventList) {
+            // Agregar contenido a la lista del spinner
+            workoutStringList.add(workout.workoutDescription());
         }
-        System.out.println(sql);
-        ArrayList<String> eventos = dao.getConcatRows(sql, new String[]{"De ", " a ", " con: ", " ", ""});
-        //Llenar spinner de eventos disponibles
-        UIHelpers.fillListView(lvEventos, eventos, this.getContext());
+
+        // Llenar el listview con los eventos de ejercicio obtenidos.
+        UIHelpers.fillListView(lvEventos, workoutStringList, this.getContext());
     }
+
+
 }

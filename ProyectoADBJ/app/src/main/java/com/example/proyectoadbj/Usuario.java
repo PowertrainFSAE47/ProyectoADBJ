@@ -46,8 +46,6 @@ public class Usuario implements Parcelable {
         this.email = email;
     }
 
-
-
     public String getNombres() {
         return nombres;
     }

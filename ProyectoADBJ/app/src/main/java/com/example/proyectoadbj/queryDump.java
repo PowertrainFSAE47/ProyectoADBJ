@@ -83,41 +83,49 @@ public class queryDump {
     public String[] initEventos = {
 
             //                          id,fecha,hora_inicio,hora_fin,id_training,id_instructor
-            "insert into eventos values (null, '16/10/2019','14:00','15:00',2,1,1)",
-            "insert into eventos values (null, '16/10/2019','16:00','18:00',5,1,2)",
-            "insert into eventos values (null, '16/10/2019','19:00','21:00',22,2,3)",
-            "insert into eventos values (null, '16/10/2019','14:00','15:00',12,2,4)",
-            "insert into eventos values (null, '16/10/2019','16:00','18:00',5,3,5)",
-            "insert into eventos values (null, '16/10/2019','19:00','21:00',22,4,5)",
-            "insert into eventos values (null, '16/10/2019','14:00','15:00',12,4,2)",
-            "insert into eventos values (null, '17/10/2019','16:00','18:00',5,1,2)",
-            "insert into eventos values (null, '17/10/2019','19:00','21:00',22,2,3)",
-            "insert into eventos values (null, '17/10/2019','14:00','15:00',12,2,4)",
-            "insert into eventos values (null, '17/10/2019','16:00','18:00',5,3,5)",
-            "insert into eventos values (null, '17/10/2019','19:00','21:00',22,4,5)",
-            "insert into eventos values (null, '17/10/2019','14:00','15:00',12,4,2)",
-            "insert into eventos values (null, '18/1/2020','14:00','15:00',10,5,4)",
-            "insert into eventos values (null, '18/1/2020','14:00','15:00',10,5,2)",
-            "insert into eventos values (null, '18/1/2020','14:00','15:00',10,5,1)"
+            "insert into eventos values (null, '16/10/2019','14:00','15:00',2,2,1)",
+            "insert into eventos values (null, '16/10/2019','16:00','18:00',5,2,2)",
+            "insert into eventos values (null, '16/10/2019','19:00','21:00',22,3,3)",
+            "insert into eventos values (null, '16/10/2019','14:00','15:00',12,3,4)",
+            "insert into eventos values (null, '16/10/2019','16:00','18:00',5,4,5)",
+            "insert into eventos values (null, '16/10/2019','19:00','21:00',22,5,5)",
+            "insert into eventos values (null, '16/10/2019','14:00','15:00',12,5,2)",
+            "insert into eventos values (null, '17/10/2019','16:00','18:00',5,2,2)",
+            "insert into eventos values (null, '17/10/2019','19:00','21:00',22,3,3)",
+            "insert into eventos values (null, '17/10/2019','14:00','15:00',12,3,4)",
+            "insert into eventos values (null, '17/10/2019','16:00','18:00',5,4,5)",
+            "insert into eventos values (null, '17/10/2019','19:00','21:00',22,5,5)",
+            "insert into eventos values (null, '17/10/2019','14:00','15:00',12,5,2)",
+            "insert into eventos values (null, '18/1/2020','14:00','15:00',10,6,4)",
+            "insert into eventos values (null, '18/1/2020','14:00','15:00',10,6,2)",
+            "insert into eventos values (null, '18/1/2020','14:00','15:00',10,6,1)"
     };
 
 
 
     public String getTrainings="select nombre from trainings";
 
-    public String getEventosFiltrados(String fecha, String filtro){
-        return "select hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos " +
-                "from eventos,usuarios,trainings " +
-                "where eventos.id_training=trainings.id " +
-                "and eventos.id_instructor=usuarios.id " +
-                "and eventos.fecha='"+fecha+"'" +
-                "and trainings.nombre='"+filtro+"'";
+    public String checkUserOnCalendarEntry(int idEvento, String activeUsername){
+
+        /*
+        Consulta para determinar si el usuario activeUsername está suscrito a un evento (workoutEvent)
+        particular con id idEvento. Si retorna 1, el usuario está registrado, si retorna 0, no está
+         */
+
+        return "select count(*) from usuarios,eventos,calendario,trainings " +
+                "where calendario.id_usuario=usuarios.id " +
+                "and eventos.id=calendario.id_evento " +
+                "and trainings.id=eventos.id_training " +
+                "and calendario.id_evento="+idEvento+
+                " and usuarios.username='"+activeUsername+"'";
     }
-    public String getEventosDisponibles(String fecha){
-        return "select hora_inicio,hora_fin,usuarios.nombre,usuarios.apellidos " +
-                "from eventos,usuarios,trainings " +
-                "where eventos.id_training=trainings.id " +
-                "and eventos.id_instructor=usuarios.id " +
-                "and eventos.fecha='"+fecha+"'";
+    public String getUsernameId(String activeUsername){
+        // Retorna el id en base de datos del username activeUsername
+        return "select id from usuarios where username='"+activeUsername+"'";
     }
+
+    public String insertCalendario(int eventId,int activeUserId){
+        return "insert into calendario values (null,"+eventId+","+activeUserId+")";
+    }
+
 }

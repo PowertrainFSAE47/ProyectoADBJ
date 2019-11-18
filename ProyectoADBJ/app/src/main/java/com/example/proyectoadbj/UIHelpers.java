@@ -33,10 +33,12 @@ public class UIHelpers {
         spinner.setAdapter(adapter);
     }
 
-    public static void fillListView(ListView listview, ArrayList<String> lista, Context context){
+    public static void fillListView(ListView listView, ArrayList<String> lista, Context context){
 
         ArrayAdapter<String> adapter = new ArrayAdapter <> (context, android.R.layout.simple_dropdown_item_1line,lista);
-        listview.setAdapter(adapter);
+        listView.setAdapter(adapter);
     }
+
+
 
 }
