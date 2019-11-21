@@ -119,7 +119,7 @@ public class queryDump {
                 "and calendario.id_evento="+idEvento+
                 " and usuarios.username='"+activeUsername+"'";
     }
-    public String getUsernameId(String activeUsername){
+    public String getIdFromUsername(String activeUsername){
         // Retorna el id en base de datos del username activeUsername
         return "select id from usuarios where username='"+activeUsername+"'";
     }
@@ -145,6 +145,13 @@ public class queryDump {
     }
     public String deleteCalendarEntry(int idUsuario,int idEvento){
         return "delete from calendario where id_usuario="+idUsuario+" and id_evento="+idEvento+"";
+    }
+
+    public String getFechasAfiliacion(String username){
+
+        return "select desde,hasta from afiliaciones,usuarios " +
+                "where afiliaciones.id_usuario=usuarios.id " +
+                "and usuarios.username='"+username+"'";
     }
 
 }

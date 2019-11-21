@@ -85,11 +85,11 @@ public class fragmentUser extends Fragment {
         // Tipo de plan
         lblPlan.setText("Tu plan: "+dao.getPlan(activeUserName));
         // Fechas de plan
-        lblFechasPlan.setText("Desde: //implementar DAO.getfechas");
+
+        lblFechasPlan.setText(dao.getFechasPlan(activeUserName));
 
         // Email
         lblEmail.setText(user.getEmail());
-
     }
 
     public fragmentUser() {

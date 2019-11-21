@@ -114,6 +114,19 @@ public class DAO extends SQLiteOpenHelper {
             return "NO AFILIADO";
         }
     }
+    public String getFechasPlan(String username){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = q.getFechasAfiliacion(username);
+        Cursor datos = db.rawQuery(sql, null);
+
+        if (datos.moveToNext()) {
+            return "Desde: "+datos.getString(0)+" hasta "+datos.getString(1);
+        } else {
+            return "NO AFILIADO";
+        }
+
+    }
 
 
     public boolean registerUser(Usuario user) {
@@ -255,7 +268,7 @@ public class DAO extends SQLiteOpenHelper {
         // Obtener database
         SQLiteDatabase db = this.getReadableDatabase();
         //Obtener id del usuario
-        Cursor datos = db.rawQuery(q.getUsernameId(activeUserName), null);
+        Cursor datos = db.rawQuery(q.getIdFromUsername(activeUserName), null);
 
         if (datos.moveToNext()) {
             return datos.getInt(0);
