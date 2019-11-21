@@ -133,15 +133,18 @@ public class queryDump {
         return "select eventos.id," +
                 "eventos.hora_inicio," +
                 "eventos.hora_fin," +
-                "trainings.nombre," +
                 "usuarios.nombre," +
                 "usuarios.apellidos," +
+                "trainings.nombre," +
                 "eventos.fecha" +
                 " from calendario,trainings,eventos,usuarios " +
                 "where eventos.id=calendario.id_evento " +
                 "and eventos.id_training=trainings.id " +
                 "and eventos.id_instructor=usuarios.id " +
                 "and calendario.id_usuario='"+idUsuario+"'";
+    }
+    public String deleteCalendarEntry(int idUsuario,int idEvento){
+        return "delete from calendario where id_usuario="+idUsuario+" and id_evento="+idEvento+"";
     }
 
 }

@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DAO extends SQLiteOpenHelper {
@@ -15,6 +14,8 @@ public class DAO extends SQLiteOpenHelper {
 
     // Todos los queries reposan estáticos en la clase queryDump.
     private queryDump q = new queryDump();
+
+    // Context
 
 
     public DAO(Context context) {
@@ -264,11 +265,9 @@ public class DAO extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String>  getCalendarEvents(int idUsuario) {
+    public ArrayList<workoutEvent>  getCalendarEvents(int idUsuario) {
 
-        // En esta lista se almacenan los workouts en formato string. Pueden entonces volcarse
-        //en un listview
-        ArrayList<String> workoutList=new ArrayList<>();
+        ArrayList<workoutEvent> workoutEventList=new ArrayList<>();
         // Obtener database
         SQLiteDatabase db = this.getReadableDatabase();
         //Obtener los campos de calendarios en donde id_usuario==idUsuario
@@ -276,18 +275,32 @@ public class DAO extends SQLiteOpenHelper {
 
         while(datos.moveToNext()) {
 
-            workoutEvent we=new workoutEvent(
+            workoutEvent workoutevent=new workoutEvent(
                     datos.getInt(0),
                     datos.getString(1),
                     datos.getString(2),
-                    datos.getString(3),
-                    datos.getString(4),
-                    datos.getString(5));
+                    datos.getString(3)+" "+datos.getString(4),
+                    datos.getString(5),
+                    datos.getString(6));
 
-            workoutList.add(we.workoutDescription());
+            workoutEventList.add(workoutevent);
+        }
+        return workoutEventList;
+    }
+
+    public boolean exitEvent(int idUsuario,int idEvento){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql=q.deleteCalendarEntry(idUsuario,idEvento);
+        System.out.println("Executing SQL: "+sql);
+
+        try {
+            db.execSQL(sql);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
 
-        return workoutList;
     }
 
 

@@ -22,6 +22,10 @@ public class workoutEvent implements Parcelable {
         this.fecha = fecha;
     }
 
+    /*public workoutEvent workoutFromDescription(String description){
+        String separadores[] ={", de ", " a ", " con: "};
+        return new workoutEvent()
+    }*/
 
     public String workoutDescription(){
         String separadores[] ={", de ", " a ", " con: "};

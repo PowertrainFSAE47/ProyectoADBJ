@@ -15,4 +15,6 @@ public enum enumErrores {
     usuarioYaExiste,
     usuarioRegistradoEnCalendario,
     ustedYaEstaRegistrado,
+    eliminadoCorrectamente,
+    noSePuedeEliminar
 }

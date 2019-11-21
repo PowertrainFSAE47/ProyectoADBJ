@@ -19,7 +19,6 @@ public class fragmentPagerAdapter extends FragmentPagerAdapter {
         this.numTabs=numTabs;
         this.activeUserName=activeUserName;
 
-
     }
 
     @Override

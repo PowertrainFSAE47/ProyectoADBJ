@@ -17,7 +17,6 @@ public class errorHandler {
         Toast myToast = new Toast(context);
         myToast.setGravity(Gravity.TOP, 0, 0);
 
-
         switch (err) {
             case loginError:
                 // Mostrar mensaje de error
@@ -61,7 +60,12 @@ public class errorHandler {
             case ustedYaEstaRegistrado:
                 myToast.makeText(context, "Esta actividad ya se encuentra en su calendario!", Toast.LENGTH_SHORT).show();
                 break;
-
+            case eliminadoCorrectamente:
+                myToast.makeText(context, "Registro eliminado correctamente!", Toast.LENGTH_SHORT).show();
+                break;
+            case noSePuedeEliminar:
+                myToast.makeText(context, "No se puede eliminar este registro!", Toast.LENGTH_SHORT).show();
+                break;
             default:
                 Toast.makeText(context, "Error desconocido", Toast.LENGTH_SHORT).show();
         }

@@ -133,7 +133,6 @@ public class fragmentEventos extends Fragment {
                 if(estado==0){
                     errorHandler.Toaster(enumErrores.errorDeRegistro,view.getContext());
                 }
-                
                 if(estado==-1){
                     errorHandler.Toaster(enumErrores.ustedYaEstaRegistrado,view.getContext());
                 }
