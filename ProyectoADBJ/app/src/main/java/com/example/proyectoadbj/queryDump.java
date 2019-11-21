@@ -124,12 +124,24 @@ public class queryDump {
         return "select id from usuarios where username='"+activeUsername+"'";
     }
 
-    public String insertCalendario(int eventId,int activeUserId){
-        return "insert into calendario values (null,"+eventId+","+activeUserId+")";
+    public String insertCalendario(int eventId,int idUsuario){
+        return "insert into calendario values (null,"+eventId+","+idUsuario+")";
     }
 
     public String getCalendarEntries(int idUsuario){
-        return "select id_eventos from calendario where id_usuario='"+idUsuario+"'";
+
+        return "select eventos.id," +
+                "eventos.hora_inicio," +
+                "eventos.hora_fin," +
+                "trainings.nombre," +
+                "usuarios.nombre," +
+                "usuarios.apellidos," +
+                "eventos.fecha" +
+                " from calendario,trainings,eventos,usuarios " +
+                "where eventos.id=calendario.id_evento " +
+                "and eventos.id_training=trainings.id " +
+                "and eventos.id_instructor=usuarios.id " +
+                "and calendario.id_usuario='"+idUsuario+"'";
     }
 
 }

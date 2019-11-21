@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DAO extends SQLiteOpenHelper {
@@ -263,8 +264,30 @@ public class DAO extends SQLiteOpenHelper {
 
     }
 
-    public void getCalendarEvents(){
+    public ArrayList<String>  getCalendarEvents(int idUsuario) {
 
+        // En esta lista se almacenan los workouts en formato string. Pueden entonces volcarse
+        //en un listview
+        ArrayList<String> workoutList=new ArrayList<>();
+        // Obtener database
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Obtener los campos de calendarios en donde id_usuario==idUsuario
+        Cursor datos = db.rawQuery(q.getCalendarEntries(idUsuario), null);
+
+        while(datos.moveToNext()) {
+
+            workoutEvent we=new workoutEvent(
+                    datos.getInt(0),
+                    datos.getString(1),
+                    datos.getString(2),
+                    datos.getString(3),
+                    datos.getString(4),
+                    datos.getString(5));
+
+            workoutList.add(we.workoutDescription());
+        }
+
+        return workoutList;
     }
 
 

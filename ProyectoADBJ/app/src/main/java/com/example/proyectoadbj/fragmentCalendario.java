@@ -1,6 +1,7 @@
 package com.example.proyectoadbj;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -29,6 +30,10 @@ public class fragmentCalendario extends Fragment {
     // Data access object y querydump
     DAO dao;
     queryDump q=new queryDump();
+
+    // Controles
+    ListView lvCalendario;
+    Usuario usuario;
 
 
     public fragmentCalendario() {
@@ -66,6 +71,8 @@ public class fragmentCalendario extends Fragment {
         // Inicializar fragmento
         initClassFragment(container,view);
 
+        // Creacion del objeto de acceso a BD
+        dao = new DAO(container.getContext());
 
         return view;
     }
@@ -73,35 +80,20 @@ public class fragmentCalendario extends Fragment {
     public void initClassFragment(ViewGroup container, View view){
 
         //Views y controles
-        ListView lvCalendario=view.findViewById(R.id.lvCalendario);
-
-        // Conexion a BD y obtencion de username activo.
-        dao = new DAO(container.getContext());
+        lvCalendario=view.findViewById(R.id.lvCalendario);
 
         // Obtener id del usuario
-        Usuario usuario = dao.retrieveUser(activeUserName);
+        usuario = dao.retrieveUser(activeUserName);
         int idUsuario=dao.getIdFromUsuario(activeUserName);
-
-        llenarCalendario(idUsuario);
+        // Llenar lista
+        UIHelpers.fillListView(lvCalendario,dao.getCalendarEvents(idUsuario),container.getContext());
 
     }
 
-    private void llenarCalendario(int idUsuario) {
+    private void llenarCalendario(int idUsuario, Context context) {
 
-        // llenar ListView lvEventos.
-        // Generamos lista de ::workoutEvent .
-        // Esta lista puede convertirse en un arraylist de strings si se itera y se transforma usando workoutEvent::workoutDescription()
-        //workoutEventList = dao.getWorkoutEventList(fullDate,spTrainings.getSelectedItem().toString());
 
-        ArrayList<String> workoutStringList=new ArrayList<>();
 
-        for (workoutEvent workout:workoutEventList) {
-            // Agregar contenido a la lista del spinner
-            workoutStringList.add(workout.workoutDescription());
-        }
-
-        // Llenar el listview con los eventos de ejercicio obtenidos.
-        //UIHelpers.fillListView(lvEventos, workoutStringList, this.getContext());
     }
 
 
