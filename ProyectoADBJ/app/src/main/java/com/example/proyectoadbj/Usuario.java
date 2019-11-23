@@ -5,20 +5,21 @@ import android.os.Parcelable;
 
 public class Usuario implements Parcelable {
 
+    private int id;
     private String nombres,apellidos,password,genero,email,pathFoto,username;
+    private Subscripcion subscripcion;
 
     public Usuario(){
-
+        id=-1;
     }
 
-    public Usuario(String nombres, String apellidos, String username, String password, String genero, String email, String pathFoto) {
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.password = password;
-        this.genero = genero;
-        this.email = email;
-        this.pathFoto = pathFoto;
-        this.username = username;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -78,6 +79,17 @@ public class Usuario implements Parcelable {
         this.genero = genero;
     }
 
+
+
+    public Subscripcion getSubscripcion() {
+        return subscripcion;
+    }
+
+    public void setSubscripcion(Subscripcion subscripcion) {
+        this.subscripcion = subscripcion;
+    }
+
+
     @Override
     public int describeContents() {
         return 0;
@@ -85,6 +97,7 @@ public class Usuario implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeString(this.nombres);
         dest.writeString(this.apellidos);
         dest.writeString(this.password);
@@ -92,9 +105,11 @@ public class Usuario implements Parcelable {
         dest.writeString(this.email);
         dest.writeString(this.pathFoto);
         dest.writeString(this.username);
+        dest.writeParcelable(this.subscripcion, flags);
     }
 
     protected Usuario(Parcel in) {
+        this.id = in.readInt();
         this.nombres = in.readString();
         this.apellidos = in.readString();
         this.password = in.readString();
@@ -102,6 +117,7 @@ public class Usuario implements Parcelable {
         this.email = in.readString();
         this.pathFoto = in.readString();
         this.username = in.readString();
+        this.subscripcion = in.readParcelable(Subscripcion.class.getClassLoader());
     }
 
     public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {

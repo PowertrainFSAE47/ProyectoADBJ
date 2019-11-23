@@ -31,7 +31,7 @@ Fondos: #c8d6e5
 4- Clientes por registrar o no registrados:
 
 	4.1: Formularios de registro. (implementada UI, 13/10)
-	4.2: Pagos. (implementada UI, 13/10 - falta seleccionar plan y mostrar precios)
+	4.2: Pagos. (implementada UI, 13/10 - falta seleccionar subscripcion y mostrar precios)
 	2.2: Paseo por cada una de las maquinas existentes.
 	2.7: Tutorial de rutinas de ejercicios.
 	

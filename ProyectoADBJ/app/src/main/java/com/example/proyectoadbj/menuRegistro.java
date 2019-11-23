@@ -6,27 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class menuRegistro extends AppCompatActivity {
 
     private TextView txNombres;
     private TextView txApellidos;
-    //private TextView txMail;
     private TextView txPassword;
     private TextView txRepetirPassword;
     private TextView txUserNameRegistro;
-
-
     private Button btAceptarSub;
     private Button btCancelarSub;
-
     private RadioGroup rgGenero;
+    private Spinner spPagoPlanes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +32,19 @@ public class menuRegistro extends AppCompatActivity {
 
         txNombres = findViewById(R.id.txNombreRegistro);
         txApellidos = findViewById(R.id.txApellidosRegistro);
-        //txMail = findViewById(R.id.txUserNameRegistro);
         txUserNameRegistro=findViewById(R.id.txUserNameRegistro);
         txPassword = findViewById(R.id.txPasswordRegistro);
         txRepetirPassword = findViewById(R.id.txRepetirPassword);
         btAceptarSub = findViewById(R.id.btAceptarSub);
         btCancelarSub = findViewById(R.id.btCancelarSub);
         rgGenero=findViewById(R.id.rgGenero);
+        spPagoPlanes=findViewById(R.id.spPagoPlanes);
 
         //Acceso a BD
         final DAO dao = new DAO(menuRegistro.this);
+
+        // Llenar spinner de planes
+        UIHelpers.fillSpinner(spPagoPlanes,dao.getPlanes(),menuRegistro.this);
 
         btAceptarSub.setOnClickListener(new View.OnClickListener() {
             Stack<enumErrores> stackErrores = new Stack<>();
@@ -92,16 +92,15 @@ public class menuRegistro extends AppCompatActivity {
                     user.setNombres(txNombres.getText().toString().trim());
                     user.setApellidos(txApellidos.getText().toString().trim());
                     user.setGenero(UIHelpers.getSelectedRadioText(rgGenero));
-                    // Falta Casilla Email
                     user.setEmail(txUserNameRegistro.getText().toString().trim());
-
                     user.setPassword(txRepetirPassword.getText().toString().trim());
                     user.setUsername(txUserNameRegistro.getText().toString().trim());
-                    // Implementar toma/upload de fotos, se podrá?
+
+
                     user.setPathFoto("p0");
 
                     // Verificacion de usuario existente
-                    if (dao.checkUser(user.getUsername(),user.getPassword())) {
+                    if (dao.authLogin(user.getUsername(),user.getPassword())) {
                         // User existe.
                         errorHandler.Toaster(enumErrores.usuarioYaExiste,menuRegistro.this);
                     }else if(dao.registerUser(user)){

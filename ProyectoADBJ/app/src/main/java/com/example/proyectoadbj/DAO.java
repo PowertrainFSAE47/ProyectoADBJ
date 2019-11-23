@@ -1,9 +1,11 @@
 package com.example.proyectoadbj;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -65,11 +67,9 @@ public class DAO extends SQLiteOpenHelper {
         }
     }
 
-    public boolean checkUser(String user, String pass) {
+    public boolean authLogin(String username, String pass) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT COUNT (ID) FROM USUARIOS WHERE USUARIOS.USERNAME='" + user + "' AND USUARIOS.PASSWORD=" + pass;
-        Cursor datos = db.rawQuery(sql, null);
-
+        Cursor datos = db.rawQuery(q.authUser(username, pass), null);
         if (datos.moveToNext()) {
             return datos.getInt(0) == 1;
         } else {
@@ -83,56 +83,105 @@ public class DAO extends SQLiteOpenHelper {
 
         // Obtener cursor.
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "select * from usuarios where usuarios.username='" + username + "'";
+        Cursor dataUsuario = db.rawQuery(q.getUser(username), null);
+        if (dataUsuario.moveToNext()) {
 
-        Cursor datos = db.rawQuery(sql, null);
+            user.setNombres(dataUsuario.getString(1));
+            user.setApellidos(dataUsuario.getString(2));
+            user.setUsername(dataUsuario.getString(3));
+            user.setPassword(dataUsuario.getString(4));
+            user.setGenero(dataUsuario.getString(5));
+            user.setPathFoto(dataUsuario.getString(6));
+        }
 
-        if (datos.moveToNext()) {
-
-            user.setNombres(datos.getString(1));
-            user.setApellidos(datos.getString(2));
-            user.setUsername(datos.getString(3));
-            user.setPassword(datos.getString(4));
-            user.setGenero(datos.getString(5));
-            user.setPathFoto(datos.getString(6));
+        Subscripcion sub = getSubscripcionFromUsername(username);
+        if (!(sub == null)) {
+            // Usuario posee una subscripcion activa en la tabla afiliaciones
+            user.setSubscripcion(sub);
         }
 
         return user;
-
     }
 
-    public String getPlan(String username) {
+    public Subscripcion getSubscripcionFromUsername(String username) {
+
+        Subscripcion sub = new Subscripcion();
+
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "select planes.nombre from planes,usuarios,afiliaciones where planes.id=afiliaciones.id_plan and usuarios.id=afiliaciones.id_usuario and usuarios.username='" + username + "'";
-        Cursor datos = db.rawQuery(sql, null);
+        Cursor datos = db.rawQuery(q.getSubsFromUsername(username), null);
 
         if (datos.moveToNext()) {
-            String plan = datos.getString(0);
-            //datos.close();
+            sub.setIdPlan(datos.getInt(0));
+            sub.setNombrePlan(datos.getString(1));
+            sub.setFechaInicio(datos.getString(2));
+            sub.setFechaFin(datos.getString(3));
+            sub.setPrecioAnual(datos.getDouble(4));
+        }
+
+        db.close();
+        return sub;
+    }
+
+    public Subscripcion createAndSetNewPlan(String username, String nombrePlan) {
+        // Asignar el plan nombrePlan al usuario user
+
+        Subscripcion plan = new Subscripcion();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor datos = db.rawQuery(q.getSpecificPlan(nombrePlan), null);
+
+        // Crear objeto del plan nuevo
+
+        if (datos.moveToNext()) {
+            plan.setIdPlan(datos.getInt(0));
+            plan.setNombrePlan(datos.getString(1));
+            plan.setPrecioAnual(datos.getDouble(2));
+            plan.setDescripcion(datos.getString(3));
+            plan.setFechaInicio("TODAY");
+            plan.setFechaFin("+1YEAR");
+        }
+
+        // Eliminar plan existente
+        db.delete("afiliaciones", "id=" + getIdFromUsername(username), null);
+
+
+        // insertar en tabla afiliaciones
+        ContentValues valores = new ContentValues();
+        // Insercion de los datos relativos al usuario
+        valores.putNull("id");
+        valores.put("id_usuario", getIdFromUsername(username));
+        valores.put("id_rol", 1);
+
+        // Insercion de los datos relativos al plan
+        valores.put("id_plan", plan.getIdPlan());
+        valores.put("desde", plan.getFechaInicio());
+        valores.put("hasta", plan.getFechaFin());
+
+
+        // Insertar plan en la DB y retornarlo para que sea usado
+        if (db.insert("afiliaciones", null, valores) > 0) {
             return plan;
         } else {
-            return "NO AFILIADO";
-        }
-    }
-    public String getFechasPlan(String username){
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        String sql = q.getFechasAfiliacion(username);
-        Cursor datos = db.rawQuery(sql, null);
-
-        if (datos.moveToNext()) {
-            return "Desde: "+datos.getString(0)+" hasta "+datos.getString(1);
-        } else {
-            return "NO AFILIADO";
+            return null;
         }
 
     }
-
 
     public boolean registerUser(Usuario user) {
 
+        // registrar nuevo usuario
+
         SQLiteDatabase db = this.getWritableDatabase();
 
+        //ContentValues valores=new ContentValues();
+
+        //valores.putNull("id");
+        //valores.put("nombre",user.getNombres());
+
+
+        //db.insert("usuarios",null,valores);
+
+        // Reemplazar por insert en lugar de query
         String sql = "insert into usuarios values (null,'"
                 + user.getNombres() + "','"
                 + user.getApellidos() + "','"
@@ -140,6 +189,7 @@ public class DAO extends SQLiteOpenHelper {
                 + user.getPassword() + "','"
                 + user.getGenero() + "','"
                 + user.getPathFoto() + "')";
+        // Modificar return, no se requiere trycatch
         try {
             System.out.println("Registrando usuario: " + sql);
             db.execSQL(sql);
@@ -159,10 +209,8 @@ public class DAO extends SQLiteOpenHelper {
         while (datos.moveToNext()) {
 
             String elemento = datos.getString(0);
-            System.out.println("getColumn iteration: " + datos.getString(0));
             column.add(elemento);
         }
-        //datos.close();
         return column;
     }
 
@@ -208,36 +256,16 @@ public class DAO extends SQLiteOpenHelper {
 
     }
 
-    public boolean checkIfUserOnCalendarEntry(String fecha, workoutEvent workoutevent, String activeUsername) {
 
-        // Agregar al calendario un evento workout
-
-        // Conectar a DB y ejecutar consulta.
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // Contamos la cantidad de personas
-        String sql = q.checkUserOnCalendarEntry(workoutevent.getId(), activeUsername);
-
-        Cursor datos = db.rawQuery(sql, null);
-
-        if (datos.moveToNext()) {
-            if (datos.getInt(0) == 1) {
-                // El usuario ya está registrado en este workout
-                return true;
-            }
-        }
-        // Esta usuario no está registrado en el workout
-        return false;
-    }
-
-    public int joinEvent(workoutEvent workoutevent, String username) {
+    // Unirse a un workout event del calendario
+    public int joinWorkoutEvent(workoutEvent workoutevent, String username) {
 
         // Si el usuario ya está registrado, retorna -1. Si se registra, retorna 1, si hay algún error, retorna 0
         // Conectar a DB.
         SQLiteDatabase db = this.getReadableDatabase();
 
         //Obtener id del usuario y del evento
-        int idUsuario = getIdFromUsuario(username);
+        int idUsuario = getIdFromUsername(username);
         int idEvento = workoutevent.getId();
 
         // Verificar si el usuario ya está registrado para este evento
@@ -263,12 +291,29 @@ public class DAO extends SQLiteOpenHelper {
         return 0;
     }
 
-    public int getIdFromUsuario(String activeUserName) {
+    // Salirse de un workout event al que nos unimos
+    public boolean unjoinWorkoutEvent(int idUsuario, int idEvento) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String sql = q.deleteCalendarEntry(idUsuario, idEvento);
+        System.out.println("Executing SQL: " + sql);
+
+        try {
+            db.execSQL(sql);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    // Obtener el ID de un usermane particular.
+    public int getIdFromUsername(String username) {
 
         // Obtener database
         SQLiteDatabase db = this.getReadableDatabase();
         //Obtener id del usuario
-        Cursor datos = db.rawQuery(q.getIdFromUsername(activeUserName), null);
+        Cursor datos = db.rawQuery(q.getIdFromUsername(username), null);
 
         if (datos.moveToNext()) {
             return datos.getInt(0);
@@ -278,21 +323,23 @@ public class DAO extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<workoutEvent>  getCalendarEvents(int idUsuario) {
+    // Retorna un arraylist de workoutEvent en los que está registrado el usuario
+    public ArrayList<workoutEvent> getCalendarEvents(String username) {
 
-        ArrayList<workoutEvent> workoutEventList=new ArrayList<>();
+        int idUsuario = getIdFromUsername(username);
+        ArrayList<workoutEvent> workoutEventList = new ArrayList<>();
         // Obtener database
         SQLiteDatabase db = this.getReadableDatabase();
         //Obtener los campos de calendarios en donde id_usuario==idUsuario
         Cursor datos = db.rawQuery(q.getCalendarEntries(idUsuario), null);
 
-        while(datos.moveToNext()) {
+        while (datos.moveToNext()) {
 
-            workoutEvent workoutevent=new workoutEvent(
+            workoutEvent workoutevent = new workoutEvent(
                     datos.getInt(0),
                     datos.getString(1),
                     datos.getString(2),
-                    datos.getString(3)+" "+datos.getString(4),
+                    datos.getString(3) + " " + datos.getString(4),
                     datos.getString(5),
                     datos.getString(6));
 
@@ -301,19 +348,18 @@ public class DAO extends SQLiteOpenHelper {
         return workoutEventList;
     }
 
-    public boolean exitEvent(int idUsuario,int idEvento){
+    public ArrayList<String> getPlanes() {
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sql=q.deleteCalendarEntry(idUsuario,idEvento);
-        System.out.println("Executing SQL: "+sql);
+        ArrayList<String> listaPlanes = new ArrayList<>();
+        // Obtener database
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Obtener id del usuario
+        Cursor datos = db.rawQuery(q.getListaPlanes(), null);
 
-        try {
-            db.execSQL(sql);
-            return true;
-        } catch (Exception e) {
-            return false;
+        while (datos.moveToNext()) {
+            listaPlanes.add(datos.getString(0)+" Sub anual: $"+datos.getInt(1));
         }
-
+        return listaPlanes;
     }
 
 

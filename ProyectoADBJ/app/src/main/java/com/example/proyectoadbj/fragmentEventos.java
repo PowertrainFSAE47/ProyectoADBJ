@@ -125,7 +125,7 @@ public class fragmentEventos extends Fragment {
                 Crear una entrada al calendario*/
 
                 //Poner evento en el calendario
-                int estado=dao.joinEvent(workoutEventList.get(position),activeUserName);
+                int estado=dao.joinWorkoutEvent(workoutEventList.get(position),activeUserName);
 
                 if (estado==1){
                     errorHandler.Toaster(enumErrores.usuarioRegistradoEnCalendario,view.getContext());

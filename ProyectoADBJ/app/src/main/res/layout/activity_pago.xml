@@ -45,8 +45,8 @@
                 android:id="@+id/lbNombreRegistrado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:text="Pedrito de Los palotes"
                 android:textAlignment="center"
                 android:textColor="#25364F"
@@ -64,7 +64,9 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
+
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/lblMediosPago"
@@ -86,10 +88,10 @@
 
 
             <RadioGroup
+                android:id="@+id/rgPagos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/rgPagos">
+                android:layout_weight="1">
 
                 <RadioButton
                     android:id="@+id/rbCredito"
@@ -151,8 +153,8 @@
                 android:background="@drawable/edit_round"
                 android:backgroundTint="#1dd1a1"
                 android:text="Ir a pago"
-                android:textSize="20dp"
                 android:textColor="#25364F"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
 

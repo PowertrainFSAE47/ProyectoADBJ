@@ -23,19 +23,15 @@ public class fragmentCalendario extends Fragment {
 
 
     // Fields:
-
-    String fullDate;
     private String activeUserName;
     ArrayList<workoutEvent> workoutEventList;
 
-    // Data access object y querydump
+    // Data access object
     DAO dao;
-    queryDump q=new queryDump();
 
     // Controles
     ListView lvCalendario;
     Usuario usuario;
-
 
     public fragmentCalendario() {
         // Required empty public constructor
@@ -79,12 +75,8 @@ public class fragmentCalendario extends Fragment {
         // Creacion del objeto de acceso a BD
         dao = new DAO(context);
 
-        // Obtener id del usuario
-        int idUsuario=dao.getIdFromUsuario(activeUserName);
-        // Llenar lista
-
         // Crear un array persistente con los objetos workout del listview
-        workoutEventList=dao.getCalendarEvents(idUsuario);
+        workoutEventList=dao.getCalendarEvents(activeUserName);
 
         // Convertir el workoutEventList en una lista de strings.
         ArrayList<String> workoutStringList=new ArrayList<>();
@@ -97,15 +89,12 @@ public class fragmentCalendario extends Fragment {
         UIHelpers.fillListView(lvCalendario,workoutStringList,context);
 
         // Eliminar registro
-
-
-
         lvCalendario.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 // Obtener workout seleccionado
                 workoutEvent event=workoutEventList.get(position);
-                boolean exito=dao.exitEvent(dao.getIdFromUsuario(activeUserName),event.getId());
+                boolean exito=dao.unjoinWorkoutEvent(dao.getIdFromUsername(activeUserName),event.getId());
                 if (exito){
                     // Eliminado correctamente, eliminar tambien de caché local
                     workoutEventList.remove(position);

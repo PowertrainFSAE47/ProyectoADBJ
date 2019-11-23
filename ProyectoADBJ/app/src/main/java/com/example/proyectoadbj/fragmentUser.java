@@ -21,7 +21,6 @@ public class fragmentUser extends Fragment {
     // Parametros
     private String activeUserName;
 
-
     // Constructor para crear instancias de este fragmento
     public static fragmentUser crearFragmentUser(String activeUserName){
         fragmentUser frag=new fragmentUser();
@@ -43,7 +42,6 @@ public class fragmentUser extends Fragment {
         super.onCreate(savedInstanceState);
         // Desempacar bundle y extraer nombre de usuario activo.
         activeUserName=getArguments().getString("activeUserName");
-
 
     }
 
@@ -71,7 +69,6 @@ public class fragmentUser extends Fragment {
 
         // Viñeta superior
 
-
         // Conexion a BD.
         DAO dao = new DAO(container.getContext());
         Usuario user = dao.retrieveUser(activeUserName);
@@ -83,10 +80,13 @@ public class fragmentUser extends Fragment {
         int id = getResources().getIdentifier("com.example.proyectoadbj:drawable/" + user.getPathFoto(), null, null);
         imgUserPhoto.setImageResource(id);
         // Tipo de plan
-        lblPlan.setText("Tu plan: "+dao.getPlan(activeUserName));
+        lblPlan.setText("Tu plan: "+user.getSubscripcion().getNombrePlan());
         // Fechas de plan
 
-        lblFechasPlan.setText(dao.getFechasPlan(activeUserName));
+        String fechasPlan="Desde: "+user.getSubscripcion().getFechaInicio()+" hasta "
+                +user.getSubscripcion().getFechaFin();
+
+        lblFechasPlan.setText(fechasPlan);
 
         // Email
         lblEmail.setText(user.getEmail());

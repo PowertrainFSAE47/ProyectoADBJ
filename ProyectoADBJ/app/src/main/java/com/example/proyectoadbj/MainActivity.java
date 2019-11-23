@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText txPassword;
     private TextView txRegistrarse;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Instanciar botones y controles
 
-        btLogin = (Button) findViewById(R.id.btLogin);
-        txRegistrarse = (TextView) findViewById(R.id.txRegistrarse);
-        txUser = (EditText) findViewById(R.id.txUser);
-        txPassword = (EditText) findViewById(R.id.txPassword);
+        btLogin = findViewById(R.id.btLogin);
+        txRegistrarse = findViewById(R.id.txRegistrarse);
+        txUser = findViewById(R.id.txUser);
+        txPassword = findViewById(R.id.txPassword);
 
 
         //Desplegar toast en caso de que no se llenen algunos campos
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     errorHandler.Toaster(enumErrores.sinPassword, MainActivity.this);
                 } else {
 
-                    if (dao.checkUser(nombreUsuario,passUsuario)){
+                    if (dao.authLogin(nombreUsuario,passUsuario)){
                         // Login succesful
                         txUser.setText("");
                         txPassword.setText("");

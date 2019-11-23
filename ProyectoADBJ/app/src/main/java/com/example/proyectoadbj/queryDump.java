@@ -147,11 +147,29 @@ public class queryDump {
         return "delete from calendario where id_usuario="+idUsuario+" and id_evento="+idEvento+"";
     }
 
-    public String getFechasAfiliacion(String username){
 
-        return "select desde,hasta from afiliaciones,usuarios " +
-                "where afiliaciones.id_usuario=usuarios.id " +
-                "and usuarios.username='"+username+"'";
+    public String getListaPlanes(){
+        return "select nombre,precio_anual from planes";
     }
 
+
+    public String getSubsFromUsername(String username){
+        return "select planes.id,planes.nombre,afiliaciones.desde,afiliaciones.hasta,planes.precio_anual " +
+                "from planes,afiliaciones,usuarios " +
+                "where planes.id=afiliaciones.id_plan " +
+                "and afiliaciones.id_usuario=usuarios.id " +
+                "and usuarios.username='"+ username + "'";
+    }
+    public String getUser(String username){
+        return "select * from usuarios where usuarios.username='" + username + "'";
+    }
+
+    public String authUser(String username, String pass){
+        return "SELECT COUNT (ID) FROM USUARIOS " +
+                "WHERE USUARIOS.USERNAME='" + username + "' AND USUARIOS.PASSWORD=" + pass;
+    }
+
+    public String getSpecificPlan(String planName){
+        return "select * from planes where planes.nombre='"+ planName + "'";
+    }
 }
