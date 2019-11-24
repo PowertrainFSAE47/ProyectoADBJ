@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -37,6 +38,12 @@ public class UIHelpers {
 
         ArrayAdapter<String> adapter = new ArrayAdapter <> (context, android.R.layout.simple_dropdown_item_1line,lista);
         listView.setAdapter(adapter);
+    }
+
+    public static String moneyFormatter(double monto){
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        String moneyString = formatter.format(monto);
+        return moneyString;
     }
 
 

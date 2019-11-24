@@ -11,7 +11,7 @@ public class queryDump {
 
     public String createUsuarios = "CREATE TABLE 'usuarios' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'apellidos' TEXT NOT NULL, 'username' TEXT NOT NULL, 'password' TEXT NOT NULL, 'genero' TEXT NOT NULL, 'path_foto' TEXT NOT NULL)";
     public String createRoles = "CREATE TABLE 'roles' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL )";
-    public String createPlanes = "CREATE TABLE 'planes' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'precio_anual' INTEGER NOT NULL, 'descripcion' TEXT )";
+    public String createPlanes = "CREATE TABLE 'planes' ( 'id' INTEGER NOT NULL PRIMARY KEY, 'nombre' TEXT NOT NULL, 'precio_anual' INTEGER NOT NULL, 'descripcion' TEXT )";
     public String createAfiliaciones="CREATE TABLE 'afiliaciones' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'id_usuario' INTEGER NOT NULL, 'id_rol' INTEGER NOT NULL, 'id_plan' INTEGER NOT NULL, 'desde' TEXT NOT NULL, 'hasta' TEXT NOT NULL, FOREIGN KEY('id_usuario') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_plan') REFERENCES 'planes'('id'), FOREIGN KEY('id_rol') REFERENCES 'roles'('id') )";
     public String createTrainings = "CREATE TABLE 'trainings' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'nombre' TEXT NOT NULL, 'path_foto' TEXT NOT NULL )";
     public String createEventos="CREATE TABLE 'eventos' ( 'id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'fecha' TEXT NOT NULL, 'hora_inicio' TEXT NOT NULL, 'hora_fin' TEXT NOT NULL, 'max_personas' INTEGER NOT NULL, 'id_training' INTEGER NOT NULL, 'id_instructor' INTEGER NOT NULL, FOREIGN KEY('id_instructor') REFERENCES 'usuarios'('id'), FOREIGN KEY('id_training') REFERENCES 'trainings'('id') )";
@@ -31,11 +31,11 @@ public class queryDump {
     // Tabla planes
     public String[] initPlanes = {
 
-            "insert into planes values (null, 'Mr Olympia Plus',100000,'Acceso nacional sin restricciones, incluye piscinas')",
-            "insert into planes values (null, 'Mr Olympia',80000,'Acceso nacional sin piscinas')",
-            "insert into planes values (null, 'John Rambo',50000,'Acceso regional')",
-            "insert into planes values (null, 'Transporter',30000,'Solo maquinas, sin trainers')",
-            "insert into planes values (null, 'Remy Gaillard',15000,'Puedes pasar a saludar a la recepcionista')"
+            "insert into planes values (0, 'Mr Olympia Plus',100000,'Acceso nacional sin restricciones, incluye piscinas')",
+            "insert into planes values (1, 'Mr Olympia',80000,'Acceso nacional sin piscinas')",
+            "insert into planes values (2, 'John Rambo',50000,'Acceso regional')",
+            "insert into planes values (3, 'Transporter',30000,'Solo maquinas, sin trainers')",
+            "insert into planes values (4, 'Remy Gaillard',15000,'Puedes pasar a saludar a la recepcionista')"
     };
     // Tabla Tipos
 
@@ -169,7 +169,7 @@ public class queryDump {
                 "WHERE USUARIOS.USERNAME='" + username + "' AND USUARIOS.PASSWORD=" + pass;
     }
 
-    public String getSpecificPlan(String planName){
-        return "select * from planes where planes.nombre='"+ planName + "'";
+    public String getPlanFromId(int planId){
+        return "select * from planes where planes.id='"+ planId + "'";
     }
 }

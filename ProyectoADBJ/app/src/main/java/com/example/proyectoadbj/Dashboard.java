@@ -36,9 +36,9 @@ public class Dashboard extends AppCompatActivity {
         imgUserDash.setImageResource(id);
 
         //TabLayout
-        TabLayout dashTabLayout = (TabLayout) findViewById(R.id.dashTabLayout);
+        TabLayout dashTabLayout = findViewById(R.id.dashTabLayout);
         // dashViewPager es el ViewPager definido en el XML
-        ViewPager dashViewPager = (ViewPager) findViewById(R.id.dashViewPager);
+        ViewPager dashViewPager = findViewById(R.id.dashViewPager);
 
 
         // Obtener el ViewPager y setear su PagerAdapter para que pueda mostrar elementos

@@ -15,19 +15,18 @@ import android.widget.TextView;
 
 public class menuPago extends AppCompatActivity {
 
-
-
-
     private Button btPagar;
     private Button btNoPagar;
 
     private RadioGroup rgPagos;
 
-    private TextView lbNombreRegistrado;
-    private TextView lbCorreoRegistrado;
+    private TextView lbPrecioRegistrar;
+    private TextView lbUsernameRegistrar;
+    private TextView lbPlanRegistrar;
+    private TextView lbNombreRegistrar;
 
-    private Spinner spPagoPlanes;
     private DAO dao;
+    private Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,42 +36,60 @@ public class menuPago extends AppCompatActivity {
         // Botones de pago
         btPagar = findViewById(R.id.btPagar);
         btNoPagar = findViewById(R.id.btNoPagar);
-
-        // Lista de planes;
-        spPagoPlanes=findViewById(R.id.spPagoPlanes);
+        btPagar.setEnabled(true);
 
         // Radio group
         rgPagos = findViewById(R.id.rgPagos);
-        lbNombreRegistrado=findViewById(R.id.lbNombreRegistrado);
-        lbCorreoRegistrado=findViewById(R.id.lbCorreoRegistrado);
+
+        // Textviews
+        lbNombreRegistrar=findViewById(R.id.lbNombreRegistrar);
+        lbUsernameRegistrar=findViewById(R.id.lbUsernameRegistrar);
+        lbPlanRegistrar=findViewById(R.id.lbPlanRegistrar);
+        lbPrecioRegistrar=findViewById(R.id.lbPrecioRegistrar);
 
         //Obtener intent
         Intent intentRegistro = getIntent();
-        Usuario myUser = intentRegistro.getParcelableExtra("user");
-        String activeUsername=myUser.getUsername();
+
+        // Objeto usuario traido desde registro.
+        user = intentRegistro.getParcelableExtra("user");
+
 
         // Actualizar datos registrados.
-        lbNombreRegistrado.setText(myUser.getNombres()+" "+myUser.getApellidos());
-        lbCorreoRegistrado.setText(myUser.getEmail());
-
-        // Llenar listview con planes disponibles.
+        lbNombreRegistrar.setText(user.getNombres()+" "+user.getApellidos());
+        lbUsernameRegistrar.setText(user.getUsername());
+        lbPlanRegistrar.setText("Plan: "+user.getSubscripcion().getNombrePlan());
+        lbPrecioRegistrar.setText(UIHelpers.moneyFormatter(user.getSubscripcion().getPrecioAnual()));
 
         dao= new DAO(menuPago.this);
-        queryDump q=new queryDump();
-
 
         btNoPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent aMainActivity = new Intent(menuPago.this, MainActivity.class);
-                startActivity(aMainActivity);
+                Intent aMenuRegistro = new Intent(menuPago.this, menuRegistro.class);
+                startActivity(aMenuRegistro);
             }
         });
 
         btPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                errorHandler.Toaster(enumErrores.noImplementado,menuPago.this);
+
+                if (dao.getIdFromUsername(user.getUsername())==-1){
+                    // usuario no existe, registrar.
+                    boolean flag=dao.registerUser(user);
+                    if (flag){
+                        errorHandler.Toaster(enumErrores.registroExitoso,menuPago.this);
+                        btPagar.setEnabled(false);
+                    }else{
+                        errorHandler.Toaster(enumErrores.errorDeRegistro,menuPago.this);
+                    }
+                }else{
+                    //usuario ya existe
+                    errorHandler.Toaster(enumErrores.usuarioYaExiste,menuPago.this);
+                }
+
+
+
             }
         });
     }

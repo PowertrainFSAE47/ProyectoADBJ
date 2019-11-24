@@ -21,7 +21,7 @@ public class DAO extends SQLiteOpenHelper {
 
 
     public DAO(Context context) {
-        super(context, nomDB, null, 3);
+        super(context, nomDB, null, 4);
     }
 
     @Override
@@ -122,13 +122,11 @@ public class DAO extends SQLiteOpenHelper {
         return sub;
     }
 
-    public Subscripcion createAndSetNewPlan(String username, String nombrePlan) {
-        // Asignar el plan nombrePlan al usuario user
-
+    public Subscripcion getPlanFromId(int idPlan){
         Subscripcion plan = new Subscripcion();
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor datos = db.rawQuery(q.getSpecificPlan(nombrePlan), null);
+        Cursor datos = db.rawQuery(q.getPlanFromId(idPlan), null);
 
         // Crear objeto del plan nuevo
 
@@ -141,31 +139,9 @@ public class DAO extends SQLiteOpenHelper {
             plan.setFechaFin("+1YEAR");
         }
 
-        // Eliminar plan existente
-        db.delete("afiliaciones", "id=" + getIdFromUsername(username), null);
-
-
-        // insertar en tabla afiliaciones
-        ContentValues valores = new ContentValues();
-        // Insercion de los datos relativos al usuario
-        valores.putNull("id");
-        valores.put("id_usuario", getIdFromUsername(username));
-        valores.put("id_rol", 1);
-
-        // Insercion de los datos relativos al plan
-        valores.put("id_plan", plan.getIdPlan());
-        valores.put("desde", plan.getFechaInicio());
-        valores.put("hasta", plan.getFechaFin());
-
-
-        // Insertar plan en la DB y retornarlo para que sea usado
-        if (db.insert("afiliaciones", null, valores) > 0) {
-            return plan;
-        } else {
-            return null;
-        }
-
+        return plan;
     }
+
 
     public boolean registerUser(Usuario user) {
 
@@ -173,30 +149,35 @@ public class DAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //ContentValues valores=new ContentValues();
+        ContentValues contUsuario=new ContentValues();
+        ContentValues contAfiliacion =new ContentValues();
 
-        //valores.putNull("id");
-        //valores.put("nombre",user.getNombres());
+        contUsuario.putNull("id");
+        contUsuario.put("nombre",user.getNombres());
+        contUsuario.put("apellidos",user.getApellidos());
+        contUsuario.put("username",user.getUsername());
+        contUsuario.put("password",user.getPassword());
+        contUsuario.put("genero",user.getGenero());
+        contUsuario.put("path_foto",user.getPathFoto());
 
+        contAfiliacion.putNull("id");
+        contAfiliacion.put("id_usuario",getIdFromUsername(user.getUsername()));
+        contAfiliacion.put("id_rol",1);
+        contAfiliacion.put("id_plan",user.getSubscripcion().getIdPlan());
+        contAfiliacion.put("desde",user.getSubscripcion().getFechaInicio());
+        contAfiliacion.put("hasta",user.getSubscripcion().getFechaFin());
 
-        //db.insert("usuarios",null,valores);
+        long flagU=db.insert("usuarios",null,contUsuario);
+        long flagS=db.insert("afiliaciones",null,contAfiliacion);
 
-        // Reemplazar por insert en lugar de query
-        String sql = "insert into usuarios values (null,'"
-                + user.getNombres() + "','"
-                + user.getApellidos() + "','"
-                + user.getUsername() + "','"
-                + user.getPassword() + "','"
-                + user.getGenero() + "','"
-                + user.getPathFoto() + "')";
-        // Modificar return, no se requiere trycatch
-        try {
-            System.out.println("Registrando usuario: " + sql);
-            db.execSQL(sql);
+        if (flagU!=-1 && flagS!=-1){
+            // Registrado correctamente en la DB
             return true;
-        } catch (Exception e) {
+        }else{
+            // ocurrió un error
             return false;
         }
+
     }
 
 
@@ -357,7 +338,9 @@ public class DAO extends SQLiteOpenHelper {
         Cursor datos = db.rawQuery(q.getListaPlanes(), null);
 
         while (datos.moveToNext()) {
-            listaPlanes.add(datos.getString(0)+" Sub anual: $"+datos.getInt(1));
+
+            listaPlanes.add(datos.getString(0)+" --Costo anual: "
+                    +UIHelpers.moneyFormatter((double)datos.getInt(1)));
         }
         return listaPlanes;
     }
