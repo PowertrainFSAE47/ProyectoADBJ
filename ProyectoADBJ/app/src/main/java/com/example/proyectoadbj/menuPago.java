@@ -65,8 +65,14 @@ public class menuPago extends AppCompatActivity {
         btNoPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent aMenuRegistro = new Intent(menuPago.this, menuRegistro.class);
-                startActivity(aMenuRegistro);
+                if (btPagar.isEnabled()){
+                    Intent aMenuRegistro = new Intent(menuPago.this, menuRegistro.class);
+                    startActivity(aMenuRegistro);
+                }else{
+                    Intent aMainActivity = new Intent(menuPago.this, MainActivity.class);
+                    startActivity(aMainActivity);
+                }
+
             }
         });
 

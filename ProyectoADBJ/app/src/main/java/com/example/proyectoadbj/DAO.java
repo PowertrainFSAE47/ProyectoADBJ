@@ -5,9 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.icu.text.SimpleDateFormat;
 import android.widget.ArrayAdapter;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class DAO extends SQLiteOpenHelper {
 
@@ -17,7 +21,9 @@ public class DAO extends SQLiteOpenHelper {
     // Todos los queries reposan estáticos en la clase queryDump.
     private queryDump q = new queryDump();
 
-    // Context
+    // Fechas
+
+    int day,year,month;
 
 
     public DAO(Context context) {
@@ -47,6 +53,9 @@ public class DAO extends SQLiteOpenHelper {
         runSQlFromArray(q.initTrainings, db);
         runSQlFromArray(q.initAfiliaciones, db);
         runSQlFromArray(q.initEventos, db);
+
+
+
 
     }
 
@@ -135,8 +144,12 @@ public class DAO extends SQLiteOpenHelper {
             plan.setNombrePlan(datos.getString(1));
             plan.setPrecioAnual(datos.getDouble(2));
             plan.setDescripcion(datos.getString(3));
-            plan.setFechaInicio("TODAY");
-            plan.setFechaFin("+1YEAR");
+            Calendar calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+            month= calendar.get(Calendar.MONTH)+1;
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+            plan.setFechaInicio(day+"/"+month+"/"+year);
+            plan.setFechaFin(day+"/"+month+"/"+(year+1));
         }
 
         return plan;
@@ -160,21 +173,28 @@ public class DAO extends SQLiteOpenHelper {
         contUsuario.put("genero",user.getGenero());
         contUsuario.put("path_foto",user.getPathFoto());
 
-        contAfiliacion.putNull("id");
-        contAfiliacion.put("id_usuario",getIdFromUsername(user.getUsername()));
-        contAfiliacion.put("id_rol",1);
-        contAfiliacion.put("id_plan",user.getSubscripcion().getIdPlan());
-        contAfiliacion.put("desde",user.getSubscripcion().getFechaInicio());
-        contAfiliacion.put("hasta",user.getSubscripcion().getFechaFin());
-
+        //Registrar usuario
         long flagU=db.insert("usuarios",null,contUsuario);
-        long flagS=db.insert("afiliaciones",null,contAfiliacion);
 
-        if (flagU!=-1 && flagS!=-1){
-            // Registrado correctamente en la DB
-            return true;
+        if (flagU!=-1){
+            // Usuario registrado, ahora afiliar
+            contAfiliacion.putNull("id");
+            contAfiliacion.put("id_usuario",getIdFromUsername(user.getUsername()));
+            contAfiliacion.put("id_rol",1);
+            contAfiliacion.put("id_plan",user.getSubscripcion().getIdPlan());
+            contAfiliacion.put("desde",user.getSubscripcion().getFechaInicio());
+            contAfiliacion.put("hasta",user.getSubscripcion().getFechaFin());
+
+            long flagS=db.insert("afiliaciones",null,contAfiliacion);
+            if (flagS!=-1){
+                // usuario y plan registrados
+                return true;
+            }else{
+                // No se pudo registrar el plan.
+                return false;
+            }
         }else{
-            // ocurrió un error
+            // El usuario no se pudo registrar, retornar.
             return false;
         }
 
@@ -344,6 +364,4 @@ public class DAO extends SQLiteOpenHelper {
         }
         return listaPlanes;
     }
-
-
 }

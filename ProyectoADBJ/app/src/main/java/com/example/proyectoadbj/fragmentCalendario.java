@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +34,6 @@ public class fragmentCalendario extends Fragment {
     ListView lvCalendario;
     Usuario usuario;
 
-    public fragmentCalendario() {
-        // Required empty public constructor
-    }
-
     // Constructor para crear instancias de este fragmento
     public static fragmentCalendario crearFragmentClases(String activeUserName){
         fragmentCalendario frag=new fragmentCalendario();
@@ -54,8 +51,8 @@ public class fragmentCalendario extends Fragment {
         super.onCreate(savedInstanceState);
         // Desempacar bundle y extraer nombre de usuario activo.
         activeUserName=getArguments().getString("activeUserName");
-        System.out.println("OnCreate Calendario activeUserName: "+activeUserName);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -104,11 +101,15 @@ public class fragmentCalendario extends Fragment {
                 }
                 // Redibujar calendario
                 initCalendarioFragment(view.getContext());
-
                 return true;
             }
         });
 
     }
+
+    public fragmentCalendario() {
+        // Required empty public constructor
+    }
+
 
 }

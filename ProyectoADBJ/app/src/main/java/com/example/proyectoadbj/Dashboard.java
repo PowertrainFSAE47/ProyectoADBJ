@@ -15,7 +15,6 @@ import com.google.android.material.tabs.TabLayout;
 
 public class Dashboard extends AppCompatActivity {
 
-    // Con asistencia de https://guides.codepath.com/android/Google-Play-Style-Tabs-using-TabLayout
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +37,16 @@ public class Dashboard extends AppCompatActivity {
         //TabLayout
         TabLayout dashTabLayout = findViewById(R.id.dashTabLayout);
         // dashViewPager es el ViewPager definido en el XML
-        ViewPager dashViewPager = findViewById(R.id.dashViewPager);
+        final ViewPager dashViewPager = findViewById(R.id.dashViewPager);
 
 
         // Obtener el ViewPager y setear su PagerAdapter para que pueda mostrar elementos
         PagerAdapter pagerAdapter = new fragmentPagerAdapter(getSupportFragmentManager(), dashTabLayout.getTabCount(), user.getUsername());
         dashViewPager.setAdapter(pagerAdapter);
 
-        // Give the TabLayout the ViewPager
-
+        // Asigna el viewpager al viewlayout
         dashTabLayout.setupWithViewPager(dashViewPager);
 
     }
+
 }
